@@ -1,36 +1,65 @@
 import java.util.List;
 
-public class Aluno {
+public class Aluno extends Pessoa {
 
-      //Atributos basicos
-        private String nome;
-        private String sobrenome;
-        private int idade;
-        private String dataNascimento;
         
-        //Atributos de contato
-        private String email;
-        private String celular;
-
-        //Atributos pessoais
-        private String cpf;
-        private String rg;
-     
-        //Atributos financeiros
         private double matricula;
         private double mensalidade;
         private double rendaMensal;
         private double gastoMensal;
-
-        //Atributos familiares 
-        private String nomePai;
-        private String nomeMae;
        
-        //Atributos de indetificaçâo online
-        private String usuarioFacebook;
-        private String usuarioInstagram;
-        private String usuarioLinkedin;
+    
+        public aluno (){
+
+        }
+
+        public aluno (double matricula, double mensalidade, double rendaMensal, double gastoMensal){
+
+          this.matricula = matricula;
+          this.mensalidade = mensalidade;
+          this.rendaMensal = rendaMensal;
+          this.gastoMensal = gastoMensal;
+         
+
+        }
+
+        public void setMatricula(double matricula){
+          this.matricula = matricula;
+
+        }
+
+        public double getMatricula(){
+          return matricula;
+        }
+
+        public void setMensalidade(double mensalidade){
+          this.mensalidade = mensalidade;
+
+        }
+
+        public double getMensalidade(){
+          return mensalidade;
+        }
+
+        public void setRendaMensal(double rendaMensal){
+          this.rendaMensal = rendaMensal;
+
+        }
+
+        public double getRendaMensal(){
+          return rendaMensal;
+        }
+
+        public void setGastoMensal(double gastoMensal){
+          this.gastoMensal = gastoMensal;
+
+        }
+
+        public double getGastoMensal(){
+          return gastoMensal;
+        }
     }
+  
 
 
     
