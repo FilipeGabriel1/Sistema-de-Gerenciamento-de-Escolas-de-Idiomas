@@ -1,25 +1,32 @@
+package co.Arraylist;
+
+import co.Entidades.Pessoa;
+
 public class Aluno extends Pessoa{
 
         
     private double matricula;
     private double mensalidade;
     private double rendaMensal;
-    private double gastoMensal;
+    
 
   
     
    
 
     public Aluno (){
+      super();
 
     }
 
-    public Aluno (double matricula, double mensalidade, double rendaMensal, double gastoMensal){
+    public Aluno (double matricula, double mensalidade, double rendaMensal){
+      
+      
 
       this.matricula = matricula;
       this.mensalidade = mensalidade;
       this.rendaMensal = rendaMensal;
-      this.gastoMensal = gastoMensal;
+    
      
 
     }
@@ -49,15 +56,6 @@ public class Aluno extends Pessoa{
 
     public double getRendaMensal(){
       return rendaMensal;
-    }
-
-    public void setGastoMensal(double gastoMensal){
-      this.gastoMensal = gastoMensal;
-
-    }
-
-    public double getGastoMensal(){
-      return gastoMensal;
     }
 
    

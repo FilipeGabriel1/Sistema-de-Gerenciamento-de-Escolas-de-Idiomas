@@ -1,3 +1,7 @@
+package co.Entidades;
+
+import co.interfac.ITurmas;
+
 public class Pessoa implements ITurmas {
     
 
@@ -6,8 +10,8 @@ public class Pessoa implements ITurmas {
     private String dataNascimento;
     private String email;
     private int celular;
-    private String cpf;
-    private String rg;
+    private int cpf;
+    private int rg;
     private String redeSocial;
   
 
@@ -15,10 +19,10 @@ public class Pessoa implements ITurmas {
 
     }
 
-    public Pessoa(String nome, String sobrenome,String dataNascimento, String email, int celular, String cpf, String rg, String redeSocial){
+    public Pessoa(String nome, String sobreNome,String dataNascimento, String email, int celular, int cpf, int rg, String redeSocial){
 
           this.nome = nome;
-          this.sobrenome = sobrenome;
+          this.sobrenome = sobreNome;
           this.dataNascimento = dataNascimento;
           this.email = email;
           this.celular = celular;
@@ -77,22 +81,22 @@ public class Pessoa implements ITurmas {
 
     }
     
-    public void setCpf(String cpf){
+    public void setCpf(int cpf){
         this.cpf = cpf;
 
     }
 
-    public String getCpf(){
+    public int getCpf(){
         return cpf;
 
     }
 
-    public void setRg(String rg){
+    public void setRg(int rg){
         this.rg = rg;
 
     }
 
-    public String getRg(){
+    public int getRg(){
         return rg;
     }
 
@@ -123,6 +127,8 @@ public class Pessoa implements ITurmas {
         System.out.println("CPF: " + cpf);
         System.out.println("RG: " + rg);
         System.out.println("Rede Social: " + redeSocial);
+   
+        
     }
 
 }
