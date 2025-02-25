@@ -1,13 +1,11 @@
-package co.Arraylist;
-
-import co.Entidades.Pessoa;
+package co.Entidades;
 
 public class Aluno extends Pessoa{
 
         
     private double matricula;
     private double mensalidade;
-    private double rendaMensal;
+   
     
 
   
@@ -25,7 +23,7 @@ public class Aluno extends Pessoa{
 
       this.matricula = matricula;
       this.mensalidade = mensalidade;
-      this.rendaMensal = rendaMensal;
+      
     
      
 
@@ -49,14 +47,7 @@ public class Aluno extends Pessoa{
       return mensalidade;
     }
 
-    public void setRendaMensal(double rendaMensal){
-      this.rendaMensal = rendaMensal;
-
-    }
-
-    public double getRendaMensal(){
-      return rendaMensal;
-    }
+    
 
    
 

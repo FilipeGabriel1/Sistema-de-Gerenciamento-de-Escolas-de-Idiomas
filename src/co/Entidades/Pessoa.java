@@ -1,8 +1,8 @@
 package co.Entidades;
 
-import co.interfac.ITurmas;
 
-public class Pessoa implements ITurmas {
+
+public abstract class Pessoa  {
     
 
     private String nome;
@@ -13,13 +13,15 @@ public class Pessoa implements ITurmas {
     private int cpf;
     private int rg;
     private String redeSocial;
+    private int idade;
+    private String nomeCompleto;
   
 
     public Pessoa(){
 
     }
 
-    public Pessoa(String nome, String sobreNome,String dataNascimento, String email, int celular, int cpf, int rg, String redeSocial){
+    public Pessoa(String nome, String sobreNome,String dataNascimento, String email, int celular, int cpf, int rg, String redeSocial, int idade, String nomeCompleto){
 
           this.nome = nome;
           this.sobrenome = sobreNome;
@@ -29,8 +31,23 @@ public class Pessoa implements ITurmas {
           this.cpf = cpf;
           this.rg = rg;
           this.redeSocial = redeSocial;
+          this.idade = idade;
+          this.nomeCompleto = nomeCompleto;
+           
          
 
+    }
+
+    public void setSobrenome(String sobrenome) {
+        this.sobrenome = sobrenome;
+    }
+
+    public int getIdade() {
+        return idade;
+    }
+
+    public void setIdade(int idade) {
+        this.idade = idade;
     }
 
     public void setNome(String nome){
@@ -109,26 +126,14 @@ public class Pessoa implements ITurmas {
         return redeSocial;
     }
 
-    public void IdentificarAluno(){
-        System.out.println("Nome: " + nome + " " + sobrenome);
-        System.out.println("Data de Nascimento: " + dataNascimento);
-        System.out.println("Email: " + email);
-        System.out.println("Celular: " + celular);
-        System.out.println("CPF: " + cpf);
-        System.out.println("RG: " + rg);
-        System.out.println("Rede Social: " + redeSocial);
+    public void setNomeCompleto(String nomeCompleto){
+       this.nomeCompleto = this.nome + " " + this.sobrenome;
     }
 
-    public void ExibiIdentificacao(){
-        System.out.println("Nome: " + nome + " " + sobrenome);
-        System.out.println("Data de Nascimento: " + dataNascimento);
-        System.out.println("Email: " + email);
-        System.out.println("Celular: " + celular);
-        System.out.println("CPF: " + cpf);
-        System.out.println("RG: " + rg);
-        System.out.println("Rede Social: " + redeSocial);
-   
-        
+    public String getNomeCompleto(){
+        return nome + " " + sobrenome;
     }
+
+   
 
 }

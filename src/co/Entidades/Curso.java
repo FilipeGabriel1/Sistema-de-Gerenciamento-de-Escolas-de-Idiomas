@@ -1,7 +1,5 @@
 package co.Entidades;
 
-import co.Arraylist.Aluno;
-
 public class Curso extends Aluno{
     
   

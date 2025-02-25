@@ -1,6 +1,4 @@
-package co.Arraylist;
-
-import co.Entidades.Pessoa;
+package co.Entidades;
 
 public class Professor extends Pessoa {
       

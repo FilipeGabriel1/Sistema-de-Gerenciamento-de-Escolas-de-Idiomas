@@ -2,13 +2,14 @@ package co.Entidades;
 
 
 
-public abstract class Turmas extends Pessoa   {
+public class Turmas    {
 
    
     private String ingles;
     private String espanhol;
     private String frances;
     private String japones;
+    private String turma;
    
 
     
@@ -16,15 +17,16 @@ public abstract class Turmas extends Pessoa   {
 
     }   
 
-    public Turmas (String ingles, String espanhol, String frances,  String japones, String nome){
+    public Turmas (String ingles, String espanhol, String frances,  String japones, String nome, String turma){
 
         this.ingles = ingles;
         this.espanhol = espanhol;
         this.frances = frances;
         this.japones = japones;
+        this.turma = turma;
+    }
       
 
-}
 
 
 public String getIngles() {
@@ -37,6 +39,14 @@ public void setIngles(String ingles) {
 
 public String getEspanhol() {
     return espanhol;
+}
+
+public String getTurma() {
+    return turma;
+}
+
+public void setTurma(String turma) {
+    this.turma = turma;
 }
 
 public void setEspanhol(String espanhol) {
@@ -61,14 +71,9 @@ public void setJapones(String japones) {
     this.japones = japones;
 }
 
-public abstract void IdentificarAluno(Turmas matricula);
 
-public abstract void ExibiIdentificacao();
-
-public void IdentificarTurmas(Turmas matricula){
-    System.out.println("Matricula: " + matricula);
 
 }
-}
+
     
 

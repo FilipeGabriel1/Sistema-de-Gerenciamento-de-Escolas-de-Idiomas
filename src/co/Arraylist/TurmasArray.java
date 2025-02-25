@@ -56,22 +56,8 @@ public class TurmasArray extends Turmas {
         this.japones = japones;
     }
 
-    @Override
-    public void IdentificarAluno(Turmas turma) {
-        System.out.println("Identificando turma: " + turma);
-    }
+  
 
-    
-
-    @Override
-    public void IdentificarAluno() {
-        System.out.println("ID identificado com Sucesso!");
-        
-    }
-
-    @Override
-    public void ExibiIdentificacao() {
-        System.out.println("Exibindo identificação do aluno.");
-    }
+ 
 
 }
