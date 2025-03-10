@@ -3,24 +3,26 @@ package co.Entidades;
 public class Professor extends Pessoa {
       
 
-    private String cursos;
+   
     private String cargoAtual;
     private int anosExperiencia;
     private String diasDeTrabalho;
     private String horarioDeTrabalho;
+    private int id;
+    private String disciplinaLecionada;
   
    
   public Professor(){
 
   }
 
-  public Professor(String cursos, String cargoAtual,int anosExperiencia,  String diasDeTrabalho, String horarioDeTrabalho){
-    this.cursos = cursos;
+  public Professor(String cargoAtual,int anosExperiencia,  String diasDeTrabalho, String horarioDeTrabalho, int id, String disciplinaLecionada){
     this.cargoAtual = cargoAtual;
     this.anosExperiencia = anosExperiencia;
     this.diasDeTrabalho = diasDeTrabalho;
     this.horarioDeTrabalho = horarioDeTrabalho;
-    
+    this.id = id;
+    this.disciplinaLecionada = disciplinaLecionada;
     
   }
 
@@ -38,20 +40,26 @@ public class Professor extends Pessoa {
     return horarioDeTrabalho;
   }
 
+  public String getDisciplinaLecionada() {
+    return disciplinaLecionada;
+  }
+
+  public void setDisciplinaLecionada(String disciplinaLecionada) {
+    this.disciplinaLecionada = disciplinaLecionada;
+  }
+
   public void setHorarioDeTrabalho(String horarioDeTrabalho) {
     this.horarioDeTrabalho = horarioDeTrabalho;
   }
 
-  public void setCursos(String cursos){
-    this.cursos = cursos;
 
+  public int getId() {
+    return id;
   }
 
-  public String getCursos(){
-    return cursos;
-    
+  public void setId(int id) {
+    this.id = id;
   }
-
 
   public void setCargoAtual(String cargoAtual){
     this.cargoAtual = cargoAtual;
@@ -74,6 +82,11 @@ public class Professor extends Pessoa {
 
   }
 
+  @Override
+
+  public String toString(){
+    return "Nome: " + getNome() + " " + getSobrenome();
+  }
 }
 
 
