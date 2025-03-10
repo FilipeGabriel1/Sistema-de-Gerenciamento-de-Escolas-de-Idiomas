@@ -9,9 +9,7 @@ public class CursoRepositorio {
 
     private List<Curso> listaCursos = new ArrayList<Curso>();
 
-    public CursoRepositorio() {
-        adicionarCursoPadrao();
-    }
+   
 
     public void adicionarCurso(Curso curso) {
         if (curso != null) {
@@ -29,8 +27,8 @@ public class CursoRepositorio {
         return listaCursos;
     }
 
-    public void adicionarCursoPadrao(){
-        adicionarCurso(new Curso("Ingles", "Espanhol", "Frances", "Japones"));
+    public void adicionarCursoPadrao(Curso curso){
+       adicionarCurso(curso);
     }
     
 }

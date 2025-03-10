@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import co.Entidades.Aluno;
 import co.Entidades.Curso;
+import co.Entidades.CursosPrincipais;
 import co.Entidades.Professor;
 import co.Repositorio.AlunoRepositorio;
 import co.Repositorio.CursoRepositorio;
@@ -97,21 +98,22 @@ public class App {
 
   List<Curso> listaCursos = new ArrayList<Curso>();
 
- listaCursos.add(new Curso("Ingles", "Espanhol", "Frances", "Japones"));
+  listaCursos.add(new Curso(CursosPrincipais.ESPANHOL, 150, 25));
+  listaCursos.add(new Curso(CursosPrincipais.INGLES, 200, 30));
+  listaCursos.add(new Curso(CursosPrincipais.FRANCES, 180, 20));
+  listaCursos.add(new Curso(CursosPrincipais.JAPONES, 160, 15));
 
- for (Curso c : listaCursos) {
-   System.out.println("Disciplinas: " + c.getIngles() + ", " + c.getEspanhol() + ", " + c.getFrances() + ", " + c.getJapones());
+  for (Curso c : listaCursos) {
+    cursoRepositorio.adicionarCursoPadrao(c);
   }
-  
+
  
 
-  List<Curso> cursos = cursoRepositorio.listarCursos();
-  System.out.println("Lista de Cursos:");
-  for (Curso c : cursos) {
-    System.out.println("Nome: " + c.getIngles() + ", " + c.getEspanhol() + ", " + c.getFrances() + ", " + c.getJapones());
-  }
-
-alunoServicos.cursando(alunoEncontrado, "Ingles");
+List<Curso> cursos = cursoRepositorio.listarCursos();
+System.out.println("Lista de Cursos:");
+for (Curso c : cursos) {
+  System.out.println("Nome do Curso: " + c.getCursoPrincipal() + ", Carga Horária: " + c.getCargaHoraria() + ", Capacidade Máxima: " + c.getCapacidadeMaxAlunos());
+}
 
 
   }

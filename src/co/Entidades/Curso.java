@@ -6,39 +6,42 @@ public class Curso extends Pessoa{
     private int cargaHoraria;
     private int capacidadeMaxAlunos;
     private String disciplinas;
-    private String ingles;
-    private String espanhol;
-    private String frances;
-    private String japones;
+    private CursosPrincipais cursoPrincipal;
+
     private String nomeCurso;
 
-    public Curso(){
+    public Curso() {
+    }
+    
+    public Curso(CursosPrincipais cursoPrincipal, int cargaHoraria, int capacidadeMaxAlunos) {
+        this.cursoPrincipal = cursoPrincipal;
+        this.cargaHoraria = cargaHoraria;
+        this.capacidadeMaxAlunos = capacidadeMaxAlunos;
 
     }
 
-    public Curso (String ingles, String espanhol, String
-    frances, String japones){
+  
 
-    this.ingles = ingles;
-    this.espanhol = espanhol;
-    this.frances = frances;
-    this.japones = japones;
-
-    }
+    
 
     public Curso (int cargaHoraria, int capacidadeMaxAlunos, String disciplinas, String ingles, String espanhol, String
     frances, String japones, String nomeCurso){
      this.cargaHoraria = cargaHoraria;
      this.capacidadeMaxAlunos = capacidadeMaxAlunos;
      this.disciplinas = disciplinas;
-     this.ingles = ingles;
-     this.espanhol = espanhol;
-     this.frances = frances;
-     this.japones = japones;  
-        this.nomeCurso = nomeCurso;
+     
    
 
 
+    }
+
+    public CursosPrincipais getCursoPrincipal() {
+        return cursoPrincipal;
+    }
+    
+    
+    public void setCursoPrincipal(CursosPrincipais cursoPrincipal) {
+        this.cursoPrincipal = cursoPrincipal;
     }
 
     public String getNomeCurso() {
@@ -79,51 +82,23 @@ public class Curso extends Pessoa{
         this.disciplinas = disciplinas;
     }
 
-    public String getIngles() {
-        return ingles;
-    }
-
-    public void setIngles(String ingles) {
-        this.ingles = ingles;
-    }
-
-    public String getEspanhol() {
-        return espanhol;
-    }
-
-    public void setEspanhol(String espanhol) {
-        this.espanhol = espanhol;
-    }
-
-    public String getFrances() {
-        return frances;
-    }
-
-    public void setFrances(String frances) {
-        this.frances = frances;
-    }
-
-    public String getJapones() {
-        return japones;
-    }
-
-    public void setJapones(String japones) {
-        this.japones = japones;
-    }
 
    @Override
     public String toString() {
         return "Curso{" +
+                "cursoPrincipal=" + cursoPrincipal +
                 "nomeCurso='" + nomeCurso + '\'' +
                 ", cargaHoraria=" + cargaHoraria +
                 ", capacidadeMaxAlunos=" + capacidadeMaxAlunos +
                 ", disciplinas='" + disciplinas + '\'' +
-                ", ingles='" + ingles + '\'' +
-                ", espanhol='" + espanhol + '\'' +
-                ", frances='" + frances + '\'' +
-                ", japones='" + japones + '\'' +
                 '}';
     }
+
+
+
+
+
+
 
 
 }
