@@ -9,7 +9,7 @@ public class Professor extends Pessoa {
     private String diasDeTrabalho;
     private String horarioDeTrabalho;
     private int id;
-    private String disciplinaLecionada;
+    private CursosPrincipais cursoPrincipal;
   
    
   public Professor(){
@@ -22,7 +22,7 @@ public class Professor extends Pessoa {
     this.diasDeTrabalho = diasDeTrabalho;
     this.horarioDeTrabalho = horarioDeTrabalho;
     this.id = id;
-    this.disciplinaLecionada = disciplinaLecionada;
+   
     
   }
 
@@ -40,13 +40,7 @@ public class Professor extends Pessoa {
     return horarioDeTrabalho;
   }
 
-  public String getDisciplinaLecionada() {
-    return disciplinaLecionada;
-  }
 
-  public void setDisciplinaLecionada(String disciplinaLecionada) {
-    this.disciplinaLecionada = disciplinaLecionada;
-  }
 
   public void setHorarioDeTrabalho(String horarioDeTrabalho) {
     this.horarioDeTrabalho = horarioDeTrabalho;
@@ -86,6 +80,14 @@ public class Professor extends Pessoa {
 
   public String toString(){
     return "Nome: " + getNome() + " " + getSobrenome();
+  }
+
+  public CursosPrincipais getCursoPrincipal() {
+    return cursoPrincipal;
+  }
+
+  public void setCursoPrincipal(CursosPrincipais cursoPrincipal) {
+    this.cursoPrincipal = cursoPrincipal;
   }
 }
 

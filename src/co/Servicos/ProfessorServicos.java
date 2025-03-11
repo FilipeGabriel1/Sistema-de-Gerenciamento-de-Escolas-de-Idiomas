@@ -1,24 +1,22 @@
 package co.Servicos;
 
 
+import co.Entidades.CursosPrincipais;
 import co.Entidades.Professor;
 
 public class ProfessorServicos extends Professor {
 
 
-    public void cadastrar(Professor professor, int id, String nome, String sobrenome, String disciplinaLecionada){
+    public void cadastrar(Professor professor, int id, String nome, String sobrenome, CursosPrincipais cursoPrincipal){
 
         professor.setId(id);
         professor.setNome(nome);
         professor.setSobrenome(sobrenome);
-        professor.setDisciplinaLecionada(disciplinaLecionada);
-        
-       
-    }
-    public void cargoAtual(Professor professor, String cargoAtual){
-        professor.setCargoAtual(cargoAtual);
-    }
+        professor.setCursoPrincipal(cursoPrincipal);
 
+        System.out.println("Professor cadastrado com sucesso!");       
+    }
+    
     public void anosExperiencia(Professor professor, int anosExperiencia){
         professor.setAnosExperiencia(anosExperiencia);
     }

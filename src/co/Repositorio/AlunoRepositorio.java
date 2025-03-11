@@ -9,6 +9,7 @@ import co.interfac.ITurmas;
 public class AlunoRepositorio implements ITurmas<AlunoRepositorio> {
 
     private List<Aluno> listaAlunos = new ArrayList<Aluno>();
+    private List<Aluno> listaAlunosInativos = new ArrayList<>();
 
     public void adicionarAluno(Aluno aluno) {
         listaAlunos.add(aluno);
@@ -34,7 +35,18 @@ public class AlunoRepositorio implements ITurmas<AlunoRepositorio> {
         System.out.println("Aluno deletado");
     }
 
+    public void inativarAluno(String nome) {
+        listaAlunos.removeIf(aluno -> aluno.getNome().equalsIgnoreCase(nome));
+        System.out.println("Aluno Desativado do sistema: " + nome);
+    }
+    
+
     public List<Aluno> listarAlunos(){
         return listaAlunos;
     }
+
+    public List<Aluno> listarAlunosInativos(){
+        return listaAlunosInativos;
+    }
 }
+

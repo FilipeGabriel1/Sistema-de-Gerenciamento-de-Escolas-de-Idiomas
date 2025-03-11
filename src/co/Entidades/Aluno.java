@@ -6,9 +6,9 @@ public class Aluno extends Pessoa{
     private double matricula;
     private double mensalidade;
     private String turma;
-   private String cursando;
-    
-
+    private CursosPrincipais curso;
+    private Turmas turmas;
+    private boolean ativo;
   
     
    
@@ -18,15 +18,23 @@ public class Aluno extends Pessoa{
 
     }
 
-    public Aluno (double matricula, double mensalidade, double rendaMensal , String turma, String cursando){
+    public boolean isAtivo() {
+      return ativo;
+    }
+
+    public void setAtivo(boolean ativo) {
+      this.ativo = ativo;
+    }
+
+    public Aluno (double matricula, double mensalidade){
       
       
 
       this.matricula = matricula;
       this.mensalidade = mensalidade;
-      this.turma = turma;
-      this.cursando = cursando;
+     
       
+    
     
      
 
@@ -34,14 +42,6 @@ public class Aluno extends Pessoa{
 
     public String getTurma() {
       return turma;
-    }
-
-    public String getCursando() {
-      return cursando;
-    }
-
-    public void setCursando(String cursando) {
-      this.cursando = cursando;
     }
 
     public void setTurma(String turma) {
@@ -66,11 +66,29 @@ public class Aluno extends Pessoa{
       return mensalidade;
     }
 
+    public CursosPrincipais getCurso() {
+      return curso;
+    }
+
+    public void setCurso(CursosPrincipais curso) {
+      this.curso = curso;
+    }
+
+    public Turmas getTurmas() {
+      return turmas;
+    }
+
+    public void setTurmas(Turmas turmas) {
+      this.turmas = turmas;
+    }
+
 
     @Override
     public String toString() {
         return "Aluno: " + getNome() + " " + getSobrenome();
     }
+
+ 
    
 
     

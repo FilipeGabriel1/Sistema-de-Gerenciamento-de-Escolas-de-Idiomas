@@ -20,8 +20,14 @@ public class CursoRepositorio {
         }
     }
     
-   
-  
+    public Curso buscarCursoPorNome(String nome, List<Curso> cursos) {
+        for (Curso curso : cursos) {
+            if (curso.getCursoPrincipal().name().equalsIgnoreCase(nome)) {
+                return curso;
+            }
+        }
+        return null;
+    }
 
     public List<Curso> listarCursos(){
         return listaCursos;
