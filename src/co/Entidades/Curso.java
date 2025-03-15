@@ -1,47 +1,41 @@
 package co.Entidades;
 
-public class Curso extends Pessoa{
-    
-  
-    private int cargaHoraria;
-    private int capacidadeMaxAlunos;
-    private String disciplinas;
-    private CursosPrincipais cursoPrincipal;
+import java.util.ArrayList;
+import java.util.List;
 
+public class Curso{
+    
+    private String horario;
+    private int capacidadeMaxAlunos;
+    private List <Turma> turma;
     private String nomeCurso;
+    private List<Aluno> alunos;
 
     public Curso() {
+        this.turma = new ArrayList<>();
+        this.alunos = new ArrayList<>();
     }
     
-    public Curso(CursosPrincipais cursoPrincipal, int cargaHoraria, int capacidadeMaxAlunos) {
-        this.cursoPrincipal = cursoPrincipal;
-        this.cargaHoraria = cargaHoraria;
+    public Curso(String nomeCurso, int cargaHoraria, int capacidadeMaxAlunos, String horario) {
+       
         this.capacidadeMaxAlunos = capacidadeMaxAlunos;
+        this.horario = horario;
+        this.turma = new ArrayList<>();
+        this.nomeCurso = nomeCurso;
+        this.alunos = new ArrayList<>();
 
     }
 
+    
+    
   
 
-    
-
-    public Curso (int cargaHoraria, int capacidadeMaxAlunos, String disciplinas, String ingles, String espanhol, String
-    frances, String japones, String nomeCurso){
-     this.cargaHoraria = cargaHoraria;
-     this.capacidadeMaxAlunos = capacidadeMaxAlunos;
-     this.disciplinas = disciplinas;
-     
-   
-
-
+    public List<Turma> getTurma() {
+        return turma;
     }
 
-    public CursosPrincipais getCursoPrincipal() {
-        return cursoPrincipal;
-    }
-    
-    
-    public void setCursoPrincipal(CursosPrincipais cursoPrincipal) {
-        this.cursoPrincipal = cursoPrincipal;
+    public void setTurmas(List<Turma> turma) {
+        this.turma = turma;
     }
 
     public String getNomeCurso() {
@@ -52,15 +46,7 @@ public class Curso extends Pessoa{
         this.nomeCurso = nomeCurso;
     }
 
-    public void setCargaHoraria(int cargaHoraria){
-     this.cargaHoraria = cargaHoraria;
-    }
-
-    public int getCargaHoraria(){
-     return cargaHoraria;
-
-    }
-
+   
   
 
     public void setCapacidadeMaxAlunos(int capacidadeMaxAlunos){
@@ -73,33 +59,47 @@ public class Curso extends Pessoa{
 
     }
 
-
-    public String getDisciplinas() {
-        return disciplinas;
+    public String getHorario() {
+        return horario;
     }
 
-    public void setDisciplinas(String disciplinas) {
-        this.disciplinas = disciplinas;
+    public void setHorario(String horario) {
+        this.horario = horario;
     }
 
 
-   @Override
+    public void adicionarTurma(Turma turmas){
+       if (turma.size() < capacidadeMaxAlunos) {
+              turma.add(turmas);
+         return;
+       }
+    }
+    
+    public void adicionarAluno(Aluno aluno) {
+        if (alunos.size() < capacidadeMaxAlunos) {
+            alunos.add(aluno);
+        } else {
+            System.out.println("Capacidade máxima de alunos atingida para o curso: " + nomeCurso);
+        }
+    }
+
+
+   public List<Aluno> getAlunos() {
+        return alunos;
+    }
+
+    public void setAlunos(List<Aluno> alunos) {
+        this.alunos = alunos;
+    }
+
+@Override
     public String toString() {
         return "Curso{" +
-                "cursoPrincipal=" + cursoPrincipal +
+                "cursoPrincipal=" + 
                 "nomeCurso='" + nomeCurso + '\'' +
-                ", cargaHoraria=" + cargaHoraria +
                 ", capacidadeMaxAlunos=" + capacidadeMaxAlunos +
-                ", disciplinas='" + disciplinas + '\'' +
                 '}';
     }
-
-
-
-
-
-
-
 
 }
 

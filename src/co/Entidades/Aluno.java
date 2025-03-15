@@ -3,12 +3,11 @@ package co.Entidades;
 public class Aluno extends Pessoa{
 
         
-    private double matricula;
+    private int matricula;
     private double mensalidade;
-    private String turma;
-    private CursosPrincipais curso;
-    private Turmas turmas;
+    private Turma turma;
     private boolean ativo;
+    private Curso cursos;
   
     
    
@@ -26,7 +25,7 @@ public class Aluno extends Pessoa{
       this.ativo = ativo;
     }
 
-    public Aluno (double matricula, double mensalidade){
+    public Aluno (int matricula, double mensalidade){
       
       
 
@@ -40,22 +39,14 @@ public class Aluno extends Pessoa{
 
     }
 
-    public String getTurma() {
-      return turma;
-    }
-
-    public void setTurma(String turma) {
-      this.turma = turma;
-    }
-
-    public void setMatricula(double matricula){
-      this.matricula = matricula;
-
-    }
-
-    public double getMatricula(){
+    public int getMatricula() {
       return matricula;
     }
+
+    public void setMatricula(int matricula) {
+      this.matricula = matricula;
+    }
+
 
     public void setMensalidade(double mensalidade){
       this.mensalidade = mensalidade;
@@ -66,20 +57,20 @@ public class Aluno extends Pessoa{
       return mensalidade;
     }
 
-    public CursosPrincipais getCurso() {
-      return curso;
+    public Turma getTurmas() {
+      return turma;
     }
 
-    public void setCurso(CursosPrincipais curso) {
-      this.curso = curso;
+    public void setTurmas(Turma turma) {
+      this.turma = turma;
     }
 
-    public Turmas getTurmas() {
-      return turmas;
+    public Curso getCursos() {
+      return cursos;
     }
 
-    public void setTurmas(Turmas turmas) {
-      this.turmas = turmas;
+    public void setCursos(Curso cursos) {
+      this.cursos = cursos;
     }
 
 
@@ -87,9 +78,5 @@ public class Aluno extends Pessoa{
     public String toString() {
         return "Aluno: " + getNome() + " " + getSobrenome();
     }
-
  
-   
-
-    
 }

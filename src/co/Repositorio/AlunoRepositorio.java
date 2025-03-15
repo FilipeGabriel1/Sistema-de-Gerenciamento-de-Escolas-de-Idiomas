@@ -1,52 +1,49 @@
 package co.Repositorio;
 
-import java.util.List;
 import java.util.ArrayList;
-
 import co.Entidades.Aluno;
-import co.interfac.ITurmas;
+import co.interfac.IAlunoRepositorio;
 
-public class AlunoRepositorio implements ITurmas<AlunoRepositorio> {
 
-    private List<Aluno> listaAlunos = new ArrayList<Aluno>();
-    private List<Aluno> listaAlunosInativos = new ArrayList<>();
+public class AlunoRepositorio implements IAlunoRepositorio {
 
-    public void adicionarAluno(Aluno aluno) {
-        listaAlunos.add(aluno);
+    private ArrayList<Aluno> alunos;
 
-        System.out.println("Aluno Salvo: " +aluno.getNomeCompleto().toUpperCase());
+    
+
+    public AlunoRepositorio(ArrayList<Aluno> alunos) {
+       this.alunos = alunos;
+    }
+    
+    public void salvar(Aluno aluno){
+        this.alunos.add(aluno);
     }
 
-    public Aluno buscarAlunoPorNome(String nome) {
-        for (Aluno aluno : listaAlunos) {
-            if (aluno.getNome().equalsIgnoreCase(nome)) {
-                return aluno;
+    public Aluno buscarAlunoPorNome(String nome, String sobrenome) {
+        if (this.alunos != null) {
+            for (Aluno aluno : this.alunos) {
+                if (aluno.getNome().equalsIgnoreCase(nome) && aluno.getSobrenome().equalsIgnoreCase(sobrenome)) {
+                    return aluno;
+                }
             }
-        
-            else {
-                return null;
-            }
+        } else {
+            System.out.println("ARRAY LIST VAZIO !");
         }
         return null;
     }
 
-    public void deletarAluno(String nome){
-        listaAlunos.removeIf(aluno -> aluno.getNome().contains(nome));
-        System.out.println("Aluno deletado");
-    }
+            public ArrayList<Aluno> listarTodosAlunos(){
+                return alunos;
+            
+        }
 
-    public void inativarAluno(String nome) {
-        listaAlunos.removeIf(aluno -> aluno.getNome().equalsIgnoreCase(nome));
-        System.out.println("Aluno Desativado do sistema: " + nome);
-    }
+        public boolean removerAluno(Aluno aluno){
+            return alunos.remove(aluno);
+}
+        }
     
 
-    public List<Aluno> listarAlunos(){
-        return listaAlunos;
-    }
 
-    public List<Aluno> listarAlunosInativos(){
-        return listaAlunosInativos;
-    }
-}
+    
+    
 

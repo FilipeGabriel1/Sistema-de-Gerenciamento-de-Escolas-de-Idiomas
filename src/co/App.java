@@ -1,74 +1,43 @@
 package co;
 
-import java.util.Scanner;
-
-
 import co.Entidades.Aluno;
 import co.Entidades.Curso;
-import co.Entidades.CursosPrincipais;
-import co.Entidades.Professor;
-import co.Entidades.Turmas;
+import co.Entidades.Turma;
 import co.Repositorio.AlunoRepositorio;
-import co.Repositorio.CursoRepositorio;
-import co.Repositorio.ProfessorRepositorio;
 import co.Servicos.AlunoServicos;
-import co.Servicos.CursoServicos;
-import co.Servicos.ProfessorServicos;
-
 import java.util.ArrayList;
-import java.util.List;
 
 public class App {
-  public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws Exception {
 
-   
-      AlunoRepositorio alunoRepositorio = new AlunoRepositorio();
-      AlunoServicos alunoServicos = new AlunoServicos(alunoRepositorio);
+        ArrayList<Aluno> alunos = new ArrayList<>();
 
-      Aluno aluno = new Aluno();
+        AlunoRepositorio alunoRepositorio = new AlunoRepositorio(alunos);
 
-      alunoServicos.matricular(aluno, 50, "Filipe", "Gabriel", 19, 700, CursosPrincipais.INGLES, Turmas.TURMA_A);
+        AlunoServicos alunoServicos = new AlunoServicos(alunoRepositorio);
 
-      Aluno alunoEncontrado = alunoServicos.buscarAlunoPorNome("Filipe");
+        if (alunos != null) {
+           
+            Aluno a1 = new Aluno();
+            Curso cursoIngles = new Curso();
+            cursoIngles.setNomeCurso("Ingles");
+            cursoIngles.setHorario("Manhã");
 
-      if (alunoEncontrado != null) {
-          System.out.println("Aluno encontrado: " + alunoEncontrado.getNome() + " " + alunoEncontrado.getSobrenome() + ", Idade: " + alunoEncontrado.getIdade() + ", Mensalidade: " + alunoEncontrado.getMensalidade() + ", Curso: " + alunoEncontrado.getCurso() + ", Turma: " + alunoEncontrado.getTurmas());
-      } else {
-          System.out.println("Aluno não encontrado");
-      }
+            Turma turma = new Turma("Turma de Ingles A", 30);
+            cursoIngles.adicionarTurma(turma);
 
-      List<Aluno> alunos = alunoRepositorio.listarAlunos();
-      System.out.println("Lista de Alunos:");
-      for (Aluno a : alunos) {
-          System.out.println("Nome: " + a.getNome() + " " + a.getSobrenome()
-          );
-      }
+            alunoServicos.matricular(a1, 500555, "Filipe", "Gabriel", 19, 600, cursoIngles, turma);
 
-      System.out.println("--------------------------------------------------");
+            
+            Aluno a2 = new Aluno();
+            alunoServicos.matricular(a2, 500556, "João", "Silva", 22, 700, cursoIngles, turma);
 
-      alunoServicos.inativarAluno("Filipe");
+            alunoServicos.listarAlunos();
 
-      alunos = alunoRepositorio.listarAlunos();
-      System.out.println("Lista de Alunos :");
-      for (Aluno a : alunos) {
-          System.out.println("Nome: " + a.getNome() + " " + a.getSobrenome() + ", Ativo: " + a.isAtivo()
-          );
-      }
+            alunoServicos.deletarAluno(a2);
 
-      System.out.println("--------------------------------------------------");
+            alunoServicos.listarAlunos();
+        }
 
-      alunoServicos.deletarAluno("Filipe");
-
-      alunos = alunoRepositorio.listarAlunos();
-      System.out.println("Lista de Alunos:");
-      for (Aluno a : alunos) {
-          System.out.println("Nome: " + a.getNome() + " " + a.getSobrenome()
-          );
-      }
-
-      
-  }
-   
+    }
 }
-
-
