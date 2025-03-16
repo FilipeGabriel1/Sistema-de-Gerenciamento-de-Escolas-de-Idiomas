@@ -1,36 +1,42 @@
 package co.Repositorio;
 
-import java.util.List;
 import co.Entidades.Professor;
+import co.interfac.IProfessorRepositorio;
+
 import java.util.ArrayList;
 
-public class ProfessorRepositorio {
+public class ProfessorRepositorio implements IProfessorRepositorio {
 
-    private List<Professor> listaProfessores = new ArrayList<Professor>();
+   private ArrayList<Professor> professores;
 
-    public void adicionarProfessor(Professor professor) {
-        listaProfessores.add(professor);
-
-        System.out.println("Professor Salvo: " + professor.getNomeCompleto().toUpperCase());
+    public ProfessorRepositorio(ArrayList<Professor> professores) {
+        this.professores = professores;
     }
 
-    public Professor buscarProfessorPorNome(String nome) {
-        for (Professor professor : listaProfessores) {
-            if (professor.getNome().equalsIgnoreCase(nome)) {
-                return professor;
-            } else {
-                return null;
+     public void salvar(Professor professor){
+        this.professores.add(professor);
+    }
+
+    public Professor buscarProfessorPorNome(String nome, String sobrenome) {
+        if (this.professores != null) {
+            for (Professor professor : this.professores) {
+                if (professor.getNome().equalsIgnoreCase(nome) && professor.getSobrenome().equalsIgnoreCase(sobrenome)) {
+                    return professor;
+                }
             }
+        } else {
+            System.out.println("ARRAY LIST VAZIO !");
         }
         return null;
     }
 
-    public void deletarProfessor(String nome) {
-        listaProfessores.removeIf(professor -> professor.getNome().contains(nome));
-        System.out.println("Professor deletado");
-    }
+    public ArrayList<Professor> listarTodosProfessores(){
+        return professores;
+}
 
-    public List<Professor> listarProfessores() {
-        return listaProfessores;
-    }
+
+public boolean removerProfessor(Professor professor){
+    return professores.remove(professor);
+}
+
 }

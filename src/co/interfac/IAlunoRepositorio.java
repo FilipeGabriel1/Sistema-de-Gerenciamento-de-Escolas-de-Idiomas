@@ -10,6 +10,7 @@ public interface IAlunoRepositorio {
     Aluno buscarAlunoPorNome(String nome, String sobrenome);
     public boolean removerAluno(Aluno aluno);
     public ArrayList<Aluno> listarTodosAlunos();
+    public boolean desativarAluno(Aluno aluno);
     
 
 }

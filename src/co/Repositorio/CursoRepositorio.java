@@ -1,50 +1,44 @@
 package co.Repositorio;
 
 import java.util.ArrayList;
-import java.util.List;
-
 import co.Entidades.Curso;
+import co.interfac.ICursoRepositorio;
 
-public class CursoRepositorio {
+public class CursoRepositorio implements ICursoRepositorio {
 
-    private List<Curso> listaCursos = new ArrayList<Curso>();
-   
+    private ArrayList<Curso> cursos;
 
-    public void adicionarCurso(Curso curso) {
-        if (curso != null) {
-            listaCursos.add(curso);
-            System.out.println("Curso Salvo: ");
-        } else {
-            System.out.println("Nome do curso não definido");
-        }
+    public CursoRepositorio(ArrayList<Curso> cursos) {
+        this.cursos = cursos;
     }
-    
-    public Curso buscarCursoPorNome(String nome, List<Curso> cursos) {
+
+     
+    public void salvar(Curso curso){
+       this.cursos.add(curso);
+    }
+
+     public Curso buscarCursoPorNome(String nome) {
         for (Curso curso : cursos) {
             if (curso.getNomeCurso().equalsIgnoreCase(nome)) {
                 return curso;
             }
+            else {
+                System.out.println("ARRAY LIST VAZIO !");
+            }
         }
         return null;
     }
+   
 
-    public void buscarCursoPorNome(String nome) {
-        for (Curso curso : listaCursos) {
-            if (curso.getNomeCurso().equalsIgnoreCase(nome)) {
-                System.out.println("Curso encontrado: " + curso.getNomeCurso());
-            }
-        }
+   
+    public ArrayList<Curso> listarTodosCursos(){
+        return cursos;
     }
 
-    public void deletarCurso(String nome){
-        listaCursos.removeIf(curso -> curso.getNomeCurso().contains(nome));
-        System.out.println("Curso deletado");
+    public boolean removerCurso(Curso curso){
+        return cursos.remove(curso);
     }
-
-    public List<Curso> listarCursos(){
-        return listaCursos;
-    }
-
+   
     
 }
 

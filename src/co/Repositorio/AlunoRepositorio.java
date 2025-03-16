@@ -9,8 +9,6 @@ public class AlunoRepositorio implements IAlunoRepositorio {
 
     private ArrayList<Aluno> alunos;
 
-    
-
     public AlunoRepositorio(ArrayList<Aluno> alunos) {
        this.alunos = alunos;
     }
@@ -40,8 +38,13 @@ public class AlunoRepositorio implements IAlunoRepositorio {
         public boolean removerAluno(Aluno aluno){
             return alunos.remove(aluno);
 }
+
+        public boolean desativarAluno(Aluno aluno){
+            aluno.setAtivo(false);
+            return true;
         }
-    
+
+    }
 
 
     

@@ -27,6 +27,7 @@ public class AlunoServicos extends Curso{
 
     public void matricular(Aluno aluno, int matricula, String nome, String sobrenome, int idade, int mensalidade, Curso nomeCurso, Turma turma) {
           
+            aluno.setAtivo(true);
             aluno.setMatricula(matricula);
             aluno.setNome(nome);
             aluno.setSobrenome(sobrenome);
@@ -71,8 +72,11 @@ public class AlunoServicos extends Curso{
                 this.salvar(aluno);
                 System.out.println("Aluno Matriculado com Sucesso! ");
 
+                aluno.setAtivo(true);
                 aluno.setTurmas(turma);
                 turma.adicionarAluno(aluno);
+                nomeCurso.adicionarAluno(aluno);
+                
                 System.out.println("Matricula: " + aluno.getMatricula());
                 System.out.println("Nome: " + aluno.getNome());
                 System.out.println("Sobrenome: " + aluno.getSobrenome());
@@ -98,10 +102,34 @@ public class AlunoServicos extends Curso{
               }
             }
 
+            public void inativarAluno(Aluno aluno){
+                Aluno alunoPesquisado = this.alunoRepositorio.buscarAlunoPorNome(aluno.getNome(), aluno.getSobrenome());
+
+                if (alunoPesquisado != null) {
+                    aluno.setAtivo(false);
+                    System.out.println("Aluno Desativado com Sucesso! ");
+                }
+                else {
+                    System.out.println("Aluno Inexistente! ");
+                }
+            }
+
+            public void listarAlunosDesativados(){
+                for (Aluno aluno : this.alunoRepositorio.listarTodosAlunos()){
+                    if (!aluno.isAtivo()) {
+                        System.out.println("Nome: " + aluno.getNome() + " " + " Sobrenome: " + aluno.getSobrenome());
+                    }
+                }
+            }
+
             
             public void listarAlunos(){
                 for (Aluno aluno : this.alunoRepositorio.listarTodosAlunos()){
-                    System.out.println("Nome: " + aluno.getNome() + " " + " Sobrenome: " + aluno.getSobrenome()); ;
+                    if (aluno.isAtivo()) {
+                        System.out.println("Nome: " + aluno.getNome() + " " + " Sobrenome: " + aluno.getSobrenome());
+                        
+                    }
+                     
                 }
             }
             
