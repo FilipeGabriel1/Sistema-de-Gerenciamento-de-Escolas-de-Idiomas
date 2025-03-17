@@ -11,8 +11,7 @@ public class CursoRepositorio implements ICursoRepositorio {
     public CursoRepositorio(ArrayList<Curso> cursos) {
         this.cursos = cursos;
     }
-
-     
+   
     public void salvar(Curso curso){
        this.cursos.add(curso);
     }
@@ -29,8 +28,6 @@ public class CursoRepositorio implements ICursoRepositorio {
         return null;
     }
    
-
-   
     public ArrayList<Curso> listarTodosCursos(){
         return cursos;
     }
@@ -38,7 +35,5 @@ public class CursoRepositorio implements ICursoRepositorio {
     public boolean removerCurso(Curso curso){
         return cursos.remove(curso);
     }
-   
-    
 }
 

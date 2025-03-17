@@ -1,9 +1,6 @@
 package co.interfac;
 
-
 import java.util.ArrayList;
-
-
 import co.Entidades.Professor;
 
 public interface IProfessorRepositorio {

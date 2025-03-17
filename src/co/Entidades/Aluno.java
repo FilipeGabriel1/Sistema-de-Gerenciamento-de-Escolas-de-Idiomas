@@ -1,20 +1,15 @@
 package co.Entidades;
 
 public class Aluno extends Pessoa{
-
-        
+  
     private int matricula;
     private double mensalidade;
     private Turma turma;
     private boolean ativo;
     private Curso cursos;
   
-    
-   
-
     public Aluno (){
-      super();
-
+     
     }
 
     public boolean isAtivo() {
@@ -27,16 +22,8 @@ public class Aluno extends Pessoa{
 
     public Aluno (int matricula, double mensalidade){
       
-      
-
       this.matricula = matricula;
       this.mensalidade = mensalidade;
-     
-      
-    
-    
-     
-
     }
 
     public int getMatricula() {
@@ -46,7 +33,6 @@ public class Aluno extends Pessoa{
     public void setMatricula(int matricula) {
       this.matricula = matricula;
     }
-
 
     public void setMensalidade(double mensalidade){
       this.mensalidade = mensalidade;
@@ -73,10 +59,8 @@ public class Aluno extends Pessoa{
       this.cursos = cursos;
     }
 
-
     @Override
     public String toString() {
         return "Aluno: " + getNome() + " " + getSobrenome();
     }
- 
 }

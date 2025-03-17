@@ -2,7 +2,6 @@ package co;
 
 import co.Entidades.Aluno;
 import co.Entidades.Curso;
-import co.Entidades.CursoPrincipal;
 import co.Entidades.Professor;
 import co.Entidades.Turma;
 import co.Repositorio.AlunoRepositorio;
@@ -18,34 +17,54 @@ import java.util.List;
 public class App {
     public static void main(String[] args) throws Exception {
 
+        //Instanciando as turmas
+
         Turma turmaIngles = new Turma("Turma de Ingles", 30);
+        Turma turmaEspanhol = new Turma("Turma de Espanhol", 30);
+        Turma turmaFrances = new Turma("Turma de Frances", 30);
+        Turma turmaItaliano = new Turma("Turma de Japones", 30);
+
+        List<Turma> turmas = new ArrayList<>();
+        turmas.add(turmaIngles);
+
+
+        //Instanciando os cursos
+
+        ArrayList<Curso> cursos = new ArrayList<>();
+        CursoRepositorio cursoRepositorio = new CursoRepositorio(cursos);
+        CursoServicos cursoServicos = new CursoServicos(cursoRepositorio);
+        Curso curso = new Curso(); 
+        curso.setNomeCurso("Ingles");
+        Curso curso2 = new Curso();
+        curso2.setNomeCurso("Espanhol");
+        Curso curso3 = new Curso();
+        curso3.setNomeCurso("Frances");
+        Curso curso4 = new Curso();
+        curso4.setNomeCurso("Italiano");
+
+      
+    
+
+        //Instanciando os alunos
+
         ArrayList<Aluno> alunos = new ArrayList<>();
         Aluno aluno = new Aluno();
         AlunoRepositorio alunoRepositorio = new AlunoRepositorio(alunos);
         AlunoServicos alunoServicos = new AlunoServicos(alunoRepositorio);
+      
+
+        //Instanciando os professores
+
         ArrayList<Professor> professores = new ArrayList<>();
         Professor professor = new Professor();
         ProfessorRepositorio professorRepositorio = new ProfessorRepositorio(professores);
         ProfessorServicos professorServicos = new ProfessorServicos(professorRepositorio);
-        ArrayList<Curso> cursos = new ArrayList<>();
-        Curso curso = new Curso();
-        curso.setNomeCurso("Ingles");
-        List<Turma> turmas = new ArrayList<>();
-        turmas.add(turmaIngles);
-        CursoRepositorio cursoRepositorio = new CursoRepositorio(cursos);
-        CursoServicos cursoServicos = new CursoServicos(cursoRepositorio);
+      
+        
 
 
-
-
-
-
-
-
-
-
+        //Codigo Funcionando na Pratica (APENAS EXEMPLO)
         cursoServicos.adicionarCurso(curso, "08:00 - 10:00", 30, "Curso de Ingles", turmas);
-
 
         alunoServicos.matricular(aluno, 600954, "Filipe", "Gabriel", 19, 400, curso, turmaIngles);
         
@@ -53,15 +72,11 @@ public class App {
 
         System.out.println("-------------------------");
 
-    
         professorServicos.cadastrar(professor, 45637, "Joseph", "Ravioli", 15, "Segunda, Terca e Quinta", "08:00 as 10:00", "Ingles");
 
         professorServicos.listarProfessores();
 
         System.out.println("-------------------------");
-
-        
-       
 
         cursoServicos.listarCursos();
 

@@ -23,12 +23,7 @@ public class Curso{
         this.turma = new ArrayList<>();
         this.nomeCurso = nomeCurso;
         this.alunos = new ArrayList<>();
-
     }
-
-    
-    
-  
 
     public List<Turma> getTurma() {
         return turma;
@@ -46,17 +41,12 @@ public class Curso{
         this.nomeCurso = nomeCurso;
     }
 
-   
-  
-
     public void setCapacidadeMaxAlunos(int capacidadeMaxAlunos){
      this.capacidadeMaxAlunos = capacidadeMaxAlunos;
-
     }
 
     public int getCapacidadeMaxAlunos(){
      return capacidadeMaxAlunos;
-
     }
 
     public String getHorario() {
@@ -66,7 +56,6 @@ public class Curso{
     public void setHorario(String horario) {
         this.horario = horario;
     }
-
 
     public void adicionarTurma(Turma turmas){
        if (turma.size() < capacidadeMaxAlunos) {
@@ -82,7 +71,6 @@ public class Curso{
             System.out.println("Capacidade máxima de alunos atingida para o curso: " + nomeCurso);
         }
     }
-
 
    public List<Aluno> getAlunos() {
         return alunos;
@@ -100,7 +88,6 @@ public class Curso{
                 ", capacidadeMaxAlunos=" + capacidadeMaxAlunos +
                 '}';
     }
-
 }
 
 

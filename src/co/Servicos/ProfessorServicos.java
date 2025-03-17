@@ -2,7 +2,7 @@ package co.Servicos;
 
 
 import co.Entidades.Curso;
-import co.Entidades.CursoPrincipal;
+
 import co.Entidades.Professor;
 import co.interfac.IProfessorRepositorio;
 
@@ -28,13 +28,11 @@ public class ProfessorServicos extends Curso {
         professor.setDiasDeTrabalho(diasDeTrabalho);
         professor.setHorarioDeTrabalho(horarioDeTrabalho);
     
-
         System.out.println("Professor cadastrado com sucesso!");    
         
         if (invalidarID(professor.getId())) {
             System.out.println("ID invalido, Professor nao pode ser cadastrado");
-            return;
-            
+            return;     
         }
 
         if (isBlank(professor.getNome()) || isBlank(professor.getSobrenome())) {
@@ -42,9 +40,11 @@ public class ProfessorServicos extends Curso {
             return; 
         }
 
-     
-        
-
+        if (isBlank(professor.getNome()) || isBlank(professor.getSobrenome())) {
+            System.out.println("Nome ou Sobrenome Invalido, Professor nao pode ser cadastrado");
+            return;
+        }
+    
         if (isAnosExperienciaInvalido(professor.getAnosExperiencia())) {
             System.out.println("Anos de Experiência Inválido, Professor nao pode ser cadastrado");
             return;
@@ -74,7 +74,6 @@ public class ProfessorServicos extends Curso {
             System.out.println("Anos de Experiência: " + professor.getAnosExperiencia());
             System.out.println("Dias de Trabalho: " + professor.getDiasDeTrabalho());
             System.out.println("Horário de Trabalho: " + professor.getHorarioDeTrabalho());
-
         }
 
         public boolean deletarProfessor(Professor professor) {
@@ -107,10 +106,6 @@ public class ProfessorServicos extends Curso {
     private boolean isBlank(String string){
         return string == null || string.trim().isEmpty();
     }
-    
-    private boolean isCursoPrincipalInvalido(CursoPrincipal cursoPrincipal) {
-        return cursoPrincipal == null || cursoPrincipal.getName().trim().isEmpty();
-    }
 
       private boolean isAnosExperienciaInvalido(int anosExperiencia) {
         return anosExperiencia < 0;
@@ -123,6 +118,5 @@ public class ProfessorServicos extends Curso {
     private boolean isHorarioDeTrabalhoInvalido(String horarioDeTrabalho) {
         return isBlank(horarioDeTrabalho);
     }
-
 }
 

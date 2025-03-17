@@ -34,11 +34,9 @@ public class Turma {
     public void adicionarAluno(Aluno aluno){
         if (alunos.size() < capacidadeMaxAlunos){
             alunos.add(aluno);
-           
-           
-        } else {
-            System.out.println("Capacidade máxima de alunos atingida para a turma: " + nomeTurma);
             
+        } else {
+            System.out.println("Capacidade máxima de alunos atingida para a turma: " + nomeTurma);     
         }
     }
 

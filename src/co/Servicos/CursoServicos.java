@@ -12,14 +12,15 @@ public class CursoServicos extends Aluno {
 
     private ICursoRepositorio cursoRepositorio;
 
-   public CursoServicos(CursoRepositorio cursoRepositorio) {
+    public CursoServicos(CursoRepositorio cursoRepositorio) {
         this.cursoRepositorio = cursoRepositorio;
    }
 
-      public void salvar(Curso curso){
+    public void salvar(Curso curso){
         this.cursoRepositorio.salvar(curso);
     }
-      public void adicionarCurso(Curso curso, String horario, int capacidadeMaxAlunos, String nomeCurso, List<Turma> turma) {
+
+    public void adicionarCurso(Curso curso, String horario, int capacidadeMaxAlunos, String nomeCurso, List<Turma> turma) {
 
         curso.setHorario(horario);
         curso.setCapacidadeMaxAlunos(capacidadeMaxAlunos);
@@ -30,7 +31,6 @@ public class CursoServicos extends Aluno {
         if (isBlank(horario)) {
             System.out.println("Horário não pode ficar em branco, Adicione o Horario do Curso");
             return;
-        
       }
 
       if (capacidadeMaxAlunos <= 0) {
@@ -55,8 +55,7 @@ public class CursoServicos extends Aluno {
 
            else if (turma.size() > capacidadeMaxAlunos) {
             System.out.println("Capacidade Maxima de Alunos Ultrapassada, A Turma esta lotada");
-            return;
-            
+            return; 
             }
         }
     
@@ -70,7 +69,7 @@ public class CursoServicos extends Aluno {
             }
         }
     
-    public boolean deletarCurso(Curso curso) {
+       public boolean deletarCurso(Curso curso) {
         Curso cursoPesquisado = this.cursoRepositorio.buscarCursoPorNome(curso.getNomeCurso());
         if (cursoPesquisado != null) {
           System.out.println("Curso deletado com Sucesso! ");
@@ -80,21 +79,16 @@ public class CursoServicos extends Aluno {
           System.out.println("Curso Inexistente! ");
           return false;
         }
-       
         }
     
-    private boolean isBlank(String string) {
+      private boolean isBlank(String string) {
         return string == null || string.trim().isEmpty();
     }
 
-    public void listarCursos(){
+       public void listarCursos(){
         for (Curso curso: this.cursoRepositorio.listarTodosCursos()){
-                System.out.println("Nome: " + curso.getNomeCurso() + " " + " Horario: " + curso.getHorario() + " " + " Capacidade Maxima de Alunos: " + curso.getCapacidadeMaxAlunos() + " " + " Turma: " + curso.getTurma());
-  
-             
-        }
-      
-             
+                System.out.println("Nome: " + curso.getNomeCurso() + " " + " Horario: " + curso.getHorario() + " " + " Capacidade Maxima de Alunos: " + curso.getCapacidadeMaxAlunos() + " " + " Turma: " + curso.getTurma());       
+        }      
         }
     }
        

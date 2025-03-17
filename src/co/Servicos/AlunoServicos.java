@@ -1,21 +1,14 @@
 package co.Servicos;
 
-
-
-
 import co.Entidades.Aluno;
 import co.Entidades.Curso;
 import co.Entidades.Turma;
 import co.Repositorio.AlunoRepositorio;
 import co.interfac.IAlunoRepositorio;
 
-
-
-
 public class AlunoServicos extends Curso{
 
     private IAlunoRepositorio alunoRepositorio;
-
 
     public AlunoServicos(AlunoRepositorio alunoRepositorio) {
         this.alunoRepositorio = alunoRepositorio;
@@ -83,9 +76,7 @@ public class AlunoServicos extends Curso{
                 System.out.println("Idade: " + aluno.getIdade());
                 System.out.println("Mensalidade: " + aluno.getMensalidade());
                 System.out.println("Curso: " + aluno.getCursos().getNomeCurso());
-                System.out.println("Turma: " + aluno.getTurmas().getNomeTurma());  
-    
-             
+                System.out.println("Turma: " + aluno.getTurmas().getNomeTurma());   
                 }
             }
 
@@ -126,22 +117,17 @@ public class AlunoServicos extends Curso{
             public void listarAlunos(){
                 for (Aluno aluno : this.alunoRepositorio.listarTodosAlunos()){
                     if (aluno.isAtivo()) {
-                        System.out.println("Nome: " + aluno.getNome() + " " + " Sobrenome: " + aluno.getSobrenome());
-                        
-                    }
-                     
+                        System.out.println("Nome: " + aluno.getNome() + " " + " Sobrenome: " + aluno.getSobrenome());            
+                    }      
                 }
             }
             
-
-     
-
-    private boolean isValidMatricula(int matricula) {
+            private boolean isValidMatricula(int matricula) {
         String matriculaString = String.valueOf(matricula);
         return matriculaString.length() == 6;
     }
 
-    private boolean isBlank(String string){
+           private boolean isBlank(String string){
         return string == null || string.trim().isEmpty();
     }
 
@@ -149,7 +135,6 @@ public class AlunoServicos extends Curso{
         String mensalidadeString = String.valueOf(mensalidade);
         return mensalidade <= 0 || mensalidadeString.length() < 3;
     }
-
 }
     
      

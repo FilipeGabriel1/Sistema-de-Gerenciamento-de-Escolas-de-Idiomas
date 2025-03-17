@@ -34,9 +34,7 @@ public class ProfessorRepositorio implements IProfessorRepositorio {
         return professores;
 }
 
-
-public boolean removerProfessor(Professor professor){
+    public boolean removerProfessor(Professor professor){
     return professores.remove(professor);
 }
-
 }

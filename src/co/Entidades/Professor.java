@@ -1,9 +1,7 @@
 package co.Entidades;
 
 public class Professor extends Pessoa {
-      
-
-   
+       
     private String cargoAtual;
     private int anosExperiencia;
     private String diasDeTrabalho;
@@ -11,7 +9,6 @@ public class Professor extends Pessoa {
     private int id;
     private String cursoLecionado;
   
-   
   public Professor(){
 
   }
@@ -22,12 +19,8 @@ public class Professor extends Pessoa {
     this.diasDeTrabalho = diasDeTrabalho;
     this.horarioDeTrabalho = horarioDeTrabalho;
     this.id = id;
-    this.cursoLecionado = cursoLecionado;
-   
-    
+    this.cursoLecionado = cursoLecionado;  
   }
-
-  
 
   public String getDiasDeTrabalho() {
     return diasDeTrabalho;
@@ -41,12 +34,9 @@ public class Professor extends Pessoa {
     return horarioDeTrabalho;
   }
 
-
-
   public void setHorarioDeTrabalho(String horarioDeTrabalho) {
     this.horarioDeTrabalho = horarioDeTrabalho;
   }
-
 
   public int getId() {
     return id;
@@ -57,32 +47,20 @@ public class Professor extends Pessoa {
   }
 
   public void setCargoAtual(String cargoAtual){
-    this.cargoAtual = cargoAtual;
-    
+    this.cargoAtual = cargoAtual;  
   }
 
   public String getCargoAtual(){
     return cargoAtual;
   }
 
-  
-
   public void setAnosExperiencia(int anosExperiencia){
     this.anosExperiencia = anosExperiencia;
-
   }
 
   public int getAnosExperiencia(){
     return anosExperiencia;
-
   }
-
-  @Override
-
-  public String toString(){
-    return "Nome: " + getNome() + " " + getSobrenome();
-  }
-
 
   public String getCursoLecionado() {
     return cursoLecionado;
@@ -91,8 +69,12 @@ public class Professor extends Pessoa {
   public void setCursoLecionado(String cursoLecionado) {
     this.cursoLecionado = cursoLecionado;
   }
-}
 
+  @Override
+  public String toString(){
+    return "Nome: " + getNome() + " " + getSobrenome();
+  }
+}
 
 
 

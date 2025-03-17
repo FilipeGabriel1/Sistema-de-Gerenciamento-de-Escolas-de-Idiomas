@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import co.Entidades.Aluno;
 import co.interfac.IAlunoRepositorio;
 
-
 public class AlunoRepositorio implements IAlunoRepositorio {
 
     private ArrayList<Aluno> alunos;
@@ -30,20 +29,19 @@ public class AlunoRepositorio implements IAlunoRepositorio {
         return null;
     }
 
-            public ArrayList<Aluno> listarTodosAlunos(){
+     public ArrayList<Aluno> listarTodosAlunos(){
                 return alunos;
             
         }
 
-        public boolean removerAluno(Aluno aluno){
+    public boolean removerAluno(Aluno aluno){
             return alunos.remove(aluno);
 }
 
-        public boolean desativarAluno(Aluno aluno){
+    public boolean desativarAluno(Aluno aluno){
             aluno.setAtivo(false);
             return true;
         }
-
     }
 
 

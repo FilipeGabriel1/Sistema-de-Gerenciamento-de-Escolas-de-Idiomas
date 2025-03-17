@@ -1,7 +1,6 @@
 package co.interfac;
 
 import java.util.ArrayList;
-
 import co.Entidades.Aluno;
 
 public interface IAlunoRepositorio {
@@ -11,6 +10,4 @@ public interface IAlunoRepositorio {
     public boolean removerAluno(Aluno aluno);
     public ArrayList<Aluno> listarTodosAlunos();
     public boolean desativarAluno(Aluno aluno);
-    
-
 }
