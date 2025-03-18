@@ -119,4 +119,3 @@ public class ProfessorServicos extends Curso {
         return isBlank(horarioDeTrabalho);
     }
 }
-

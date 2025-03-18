@@ -29,7 +29,7 @@ public class Curso{
         return turma;
     }
 
-    public void setTurmas(List<Turma> turma) {
+    public void setTurma(List<Turma> turma) {
         this.turma = turma;
     }
 
@@ -83,11 +83,10 @@ public class Curso{
 @Override
     public String toString() {
         return "Curso{" +
-                "cursoPrincipal=" + 
+                "turma=" + turma + '\'' +
                 "nomeCurso='" + nomeCurso + '\'' +
                 ", capacidadeMaxAlunos=" + capacidadeMaxAlunos +
                 '}';
     }
 }
-
 

@@ -25,7 +25,7 @@ public class CursoServicos extends Aluno {
         curso.setHorario(horario);
         curso.setCapacidadeMaxAlunos(capacidadeMaxAlunos);
         curso.setNomeCurso(nomeCurso);
-        curso.setTurmas(turma);
+        curso.setTurma(turma);
         salvar(curso);
 
         if (isBlank(horario)) {
@@ -94,6 +94,7 @@ public class CursoServicos extends Aluno {
         }      
         }
     }
+       
        
 
 
