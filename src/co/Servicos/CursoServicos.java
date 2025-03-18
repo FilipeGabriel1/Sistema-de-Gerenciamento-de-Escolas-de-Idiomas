@@ -61,13 +61,16 @@ public class CursoServicos extends Aluno {
     
 
         public void listarAlunosDoCurso(Curso curso) {
-            System.out.println("Alunos matriculados no curso " + curso.getNomeCurso() + ":");
-            for (Turma turma : curso.getTurma()) {
-                for (Aluno aluno : turma.getAlunos()) {
-                    System.out.println(aluno.getNome() + " " + aluno.getSobrenome());
-                }
-            }
-        }
+          List<Aluno> alunos = curso.getAlunos();
+          if (alunos == null || alunos.isEmpty()) {
+              System.out.println("Nenhum aluno matriculado neste curso.");
+          } else {
+              System.out.println("Alunos matriculados no curso " + curso.getNomeCurso() + ":");
+              for (Aluno aluno : alunos) {
+                  System.out.println("Nome: " + aluno.getNome() + " " + aluno.getSobrenome());
+              }
+          }
+      }
     
        public boolean deletarCurso(Curso curso) {
         Curso cursoPesquisado = this.cursoRepositorio.buscarCursoPorNome(curso.getNomeCurso());

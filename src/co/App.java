@@ -19,13 +19,14 @@ public class App {
 
         //Instanciando as turmas
 
-        Turma turmaIngles = new Turma("Turma de Ingles", 30);
-        Turma turmaEspanhol = new Turma("Turma de Espanhol", 30);
-        Turma turmaFrances = new Turma("Turma de Frances", 30);
-        Turma turmaItaliano = new Turma("Turma de Japones", 30);
+        Turma turmaInglesA = new Turma("Turma de Ingles", 30);
+        Turma turmaEspanholA = new Turma("Turma de Espanhol", 30);
+        Turma turmaFrancesA = new Turma("Turma de Frances", 30);
+        Turma turmaJaponesA = new Turma("Turma de Japones", 30);
 
         List<Turma> turmas = new ArrayList<>();
-        turmas.add(turmaIngles);
+        turmas.add(turmaInglesA);
+        turmas.add(turmaJaponesA);
 
 
         //Instanciando os cursos
@@ -40,7 +41,7 @@ public class App {
         Curso curso3 = new Curso();
         curso3.setNomeCurso("Frances");
         Curso curso4 = new Curso();
-        curso4.setNomeCurso("Italiano");
+        curso4.setNomeCurso("Japones");
 
       
     
@@ -49,6 +50,7 @@ public class App {
 
         ArrayList<Aluno> alunos = new ArrayList<>();
         Aluno aluno = new Aluno();
+        Aluno aluno2 = new Aluno();
         AlunoRepositorio alunoRepositorio = new AlunoRepositorio(alunos);
         AlunoServicos alunoServicos = new AlunoServicos(alunoRepositorio);
       
@@ -66,8 +68,19 @@ public class App {
         //Codigo Funcionando na Pratica (APENAS EXEMPLO)
         cursoServicos.adicionarCurso(curso, "08:00 - 10:00", 30, "Curso de Ingles", turmas);
 
-        alunoServicos.matricular(aluno, 600954, "Filipe", "Gabriel", 19, 400, curso, turmaIngles);
+        cursoServicos.adicionarCurso(curso4, "10:00 - 12:00", 30, "Curso de Japones", turmas);
+
+        System.out.println("-------------------------");
+
+        alunoServicos.matricular(aluno, 600954, "Filipe", "Gabriel", 19, 400, curso, turmaInglesA);
+
+        System.out.println("-------------------------");
+
+        alunoServicos.matricular(aluno2, 576945, "Joao", "Pedro", 14, 500, curso4, turmaJaponesA);
         
+        System.out.println("-------------------------");
+
+        //Listando todos os Alunos da Empresa
         alunoServicos.listarAlunos();
 
         System.out.println("-------------------------");
@@ -80,6 +93,12 @@ public class App {
 
         cursoServicos.listarCursos();
 
+        System.out.println("-------------------------");
+
         cursoServicos.listarAlunosDoCurso(curso);
+
+        System.out.println("-------------------------");
+        
+        cursoServicos.listarAlunosDoCurso(curso4);
     }
 }
