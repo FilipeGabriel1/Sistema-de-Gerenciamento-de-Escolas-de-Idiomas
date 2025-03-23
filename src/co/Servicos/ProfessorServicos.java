@@ -18,8 +18,9 @@ public class ProfessorServicos extends Curso {
         this.professorRepositorio.salvar(professor);
     }
 
-    public void cadastrar(Professor professor, int id, String nome, String sobrenome,  int anosExperiencia, String diasDeTrabalho, String horarioDeTrabalho, String cursoLecionado) {
+    public void cadastrar(Professor professor, int id, String nome, String sobrenome,  int anosExperiencia, String diasDeTrabalho, String horarioDeTrabalho, String cursoLecionado, String cpf) {
 
+        professor.setCpf(cpf);
         professor.setId(id);
         professor.setNome(nome);
         professor.setSobrenome(sobrenome);
@@ -30,6 +31,10 @@ public class ProfessorServicos extends Curso {
     
         System.out.println("Professor cadastrado com sucesso!");    
         
+        if (!invalidarCpf(professor.getCpf())) {
+            System.out.println("CPG invalido, Aluno nao pode ser cadastrado");
+            
+        }
         if (invalidarID(professor.getId())) {
             System.out.println("ID invalido, Professor nao pode ser cadastrado");
             return;     
@@ -67,6 +72,7 @@ public class ProfessorServicos extends Curso {
                
             }
 
+            System.out.println("CPF: " + professor.getCpf());
             System.out.println("ID: " + professor.getId());
             System.out.println("Nome: " + professor.getNome());
             System.out.println("Sobrenome: " + professor.getSobrenome());
@@ -96,6 +102,11 @@ public class ProfessorServicos extends Curso {
                 
                  
             }
+        }
+
+        private boolean invalidarCpf(String cpf){
+            return cpf == null || cpf.length() != 12;
+           
         }
 
     private boolean invalidarID(int id){

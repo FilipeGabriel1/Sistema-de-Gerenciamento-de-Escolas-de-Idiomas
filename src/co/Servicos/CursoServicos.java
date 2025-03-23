@@ -20,45 +20,70 @@ public class CursoServicos extends Aluno {
         this.cursoRepositorio.salvar(curso);
     }
 
-    public void adicionarCurso(Curso curso, String horario, int capacidadeMaxAlunos, String nomeCurso, List<Turma> turma) {
+    
+    public void adicionarCurso(Curso curso, String horario, int capacidadeMaxAlunos, int capacidadeMaxAlunosPorTurma, String nomeCurso, List<Turma> turmas, String diasDasAulas) {
 
-        curso.setHorario(horario);
-        curso.setCapacidadeMaxAlunos(capacidadeMaxAlunos);
-        curso.setNomeCurso(nomeCurso);
-        curso.setTurma(turma);
-        salvar(curso);
-
-        if (isBlank(horario)) {
-            System.out.println("Horário não pode ficar em branco, Adicione o Horario do Curso");
+        if (isBlank(diasDasAulas)) {
+            System.out.println("Dias das Aulas nao pode ficar em branco, Adicione os Dias das Aulas");
             return;
+            
+        }
+      
+      if (isBlank(horario)) {
+          System.out.println("Horário não pode ficar em branco, Adicione o Horario do Curso");
+          return;
       }
 
       if (capacidadeMaxAlunos <= 0) {
-        System.out.println("Capacidade Maxima de Alunos Invalida, Adicione a Capacidade Maxima de Alunos");
-        return;        
+          System.out.println("Capacidade Maxima de Alunos Invalida, Adicione a Capacidade Maxima de Alunos");
+          return;
       }
 
-      else if (capacidadeMaxAlunos > 30) {
-        System.out.println("Capacidade Maxima de Alunos Ultrapassada, O Curso nao pode ter mais Alunos");
-        return;        
+      if (capacidadeMaxAlunos > capacidadeMaxAlunos) {
+          System.out.println("Capacidade Maxima de Alunos Ultrapassada, O Curso nao pode ter mais Alunos");
+          return;
       }
 
-      if (isBlank(curso.getNomeCurso())) {
-        System.out.println("Nome do Curso nao pode ficar em branco, Adicione o Nome do Curso");
-        return;  
+      if (isBlank(nomeCurso)) {
+          System.out.println("Nome do Curso nao pode ficar em branco, Adicione o Nome do Curso");
+          return;
       }
 
-        if (turma.size() == 0) {
-            System.out.println("Turma nao pode ficar em branco, Adicione a Turma do Curso");
-            return;
-           }
+      if (turmas == null || turmas.isEmpty()) {
+          System.out.println("Turma nao pode ficar em branco, Adicione a Turma do Curso");
+          return;
+      }
 
-           else if (turma.size() > capacidadeMaxAlunos) {
-            System.out.println("Capacidade Maxima de Alunos Ultrapassada, A Turma esta lotada");
-            return; 
+        int totalAlunos = 0;
+        for (Turma turma : turmas) {
+            totalAlunos += turma.getAlunos().size();
+            if (turma.getAlunos().size() > capacidadeMaxAlunosPorTurma) {
+                System.out.println("Capacidade Maxima de Alunos por Turma Ultrapassada, A Turma esta lotada");
+                return;
             }
         }
-    
+
+        if (totalAlunos > capacidadeMaxAlunos) {
+            System.out.println("Capacidade Maxima de Alunos do Curso Ultrapassada");
+            return;
+        }
+
+      curso.setDiaDasAulas(diasDasAulas);  
+      curso.setHorario(horario);
+      curso.setCapacidadeMaxAlunos(capacidadeMaxAlunos);
+      curso.setCapacidadeMaxAlunosPorTurma(capacidadeMaxAlunosPorTurma);
+      curso.setNomeCurso(nomeCurso);
+      curso.setTurma(turmas);
+      salvar(curso);
+
+      System.out.println("Curso adicionado com sucesso!");
+      System.out.println("Nome do Curso: " + curso.getNomeCurso());
+      System.out.println("Horário do curso: " + curso.getHorario());
+      System.out.println("Dias das Aulas que o Curso sera ministrado: " + curso.getDiaDasAulas());
+
+      System.out.println("Capacidade máxima de alunos do Curso: " + curso.getCapacidadeMaxAlunos());
+      System.out.println("Capacidade máxima de alunos por turma: " + curso.getCapacidadeMaxAlunosPorTurma());
+  }
 
         public void listarAlunosDoCurso(Curso curso) {
           List<Aluno> alunos = curso.getAlunos();
@@ -88,12 +113,23 @@ public class CursoServicos extends Aluno {
         return string == null || string.trim().isEmpty();
     }
 
-       public void listarCursos(){
-        for (Curso curso: this.cursoRepositorio.listarTodosCursos()){
-                System.out.println("Nome: " + curso.getNomeCurso() + " " + " Horario: " + curso.getHorario() + " " + " Capacidade Maxima de Alunos: " + curso.getCapacidadeMaxAlunos() + " " + " Turma: " + curso.getTurma());       
-        }      
+    public void listarCursos() {
+        for (Curso curso : this.cursoRepositorio.listarTodosCursos()) {
+            System.out.println("Nome: " + curso.getNomeCurso());
+            System.out.println("Horário: " + curso.getHorario());
+            System.out.println("Dias das Aulas: " + curso.getDiaDasAulas());
+            System.out.println("Capacidade máxima de alunos do Curso: " + curso.getCapacidadeMaxAlunos());
+            for (Turma turma : curso.getTurma()) {
+                System.out.println("Turmas do Curso: " + turma.getNomeTurma());
+                System.out.println("Capacidade máxima de alunos da Turma: " + turma.getCapacidadeMaxAlunos());
+                System.out.println("Alunos matriculados na turma: "  + turma.getNomeTurma() + ": " + turma.getAlunos().size());
+                System.out.println("-----------");
+                
+                }
+            }
         }
     }
+    
        
        
 

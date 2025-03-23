@@ -7,22 +7,35 @@ public class Curso{
     
     private String horario;
     private int capacidadeMaxAlunos;
+    private int capacidadeMaxAlunosPorTurma;
     private List <Turma> turma;
     private String nomeCurso;
     private List<Aluno> alunos;
+    private String diaDasAulas;
 
     public Curso() {
         this.turma = new ArrayList<>();
         this.alunos = new ArrayList<>();
     }
     
-    public Curso(String nomeCurso, int cargaHoraria, int capacidadeMaxAlunos, String horario) {
+    public Curso(String nomeCurso, int cargaHoraria, int capacidadeMaxAlunos, String horario, int capacidadeMaxAlunosPorTurma, String diaDasAulas) {
        
         this.capacidadeMaxAlunos = capacidadeMaxAlunos;
         this.horario = horario;
         this.turma = new ArrayList<>();
         this.nomeCurso = nomeCurso;
         this.alunos = new ArrayList<>();
+        this.capacidadeMaxAlunosPorTurma = capacidadeMaxAlunosPorTurma;
+        this.diaDasAulas = diaDasAulas;
+
+    }
+
+    public String getDiaDasAulas() {
+        return diaDasAulas;
+    }
+
+    public void setDiaDasAulas(String diaDasAulas) {
+        this.diaDasAulas = diaDasAulas;
     }
 
     public List<Turma> getTurma() {
@@ -57,9 +70,19 @@ public class Curso{
         this.horario = horario;
     }
 
+    public int getCapacidadeMaxAlunosPorTurma() {
+        return capacidadeMaxAlunosPorTurma;
+    }
+    
+    public void setCapacidadeMaxAlunosPorTurma(int capacidadeMaxAlunosPorTurma) {
+        this.capacidadeMaxAlunosPorTurma = capacidadeMaxAlunosPorTurma;
+    }
+    
+
     public void adicionarTurma(Turma turmas){
-       if (turma.size() < capacidadeMaxAlunos) {
+       if (turma.size() < capacidadeMaxAlunosPorTurma) {
               turma.add(turmas);
+              System.out.println("Turmas: " + turmas);
          return;
        }
     }
@@ -86,7 +109,10 @@ public class Curso{
                 "turma=" + turma + '\'' +
                 "nomeCurso='" + nomeCurso + '\'' +
                 ", capacidadeMaxAlunos=" + capacidadeMaxAlunos +
+                ", capacidadeMaxAlunosPorTurma=" + capacidadeMaxAlunosPorTurma +
                 '}';
     }
+
+
 }
 

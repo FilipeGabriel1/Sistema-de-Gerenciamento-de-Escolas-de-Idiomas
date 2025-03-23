@@ -1,5 +1,9 @@
 package co.Entidades;
 
+import java.util.ArrayList;
+import java.util.List;
+
+
 public class Aluno extends Pessoa{
   
     private int matricula;
@@ -7,13 +11,38 @@ public class Aluno extends Pessoa{
     private Turma turma;
     private boolean ativo;
     private Curso cursos;
+    private List<Responsavel> responsaveis;
   
     public Aluno (){
-     
+     this.responsaveis = new ArrayList<>();
     }
+    
+    public void adicionarResponsavel(String nome, String sobrenome, String cpf, int celular ){
+      this.responsaveis.add(new Responsavel(nome, sobrenome, cpf, celular));
+    }
+
+    public List<Responsavel> getResponsavel() {
+      return responsaveis;
+    }
+
+    public void setReponsavel(List<Responsavel> responsaveis) {
+      this.responsaveis = responsaveis;
+    }
+
+    public Turma getTurma() {
+      return turma;
+    }
+
+
+    
+
 
     public boolean isAtivo() {
       return ativo;
+    }
+
+    public void setTurma(Turma turma) {
+      this.turma = turma;
     }
 
     public void setAtivo(boolean ativo) {

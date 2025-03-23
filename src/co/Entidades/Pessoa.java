@@ -10,7 +10,7 @@ public abstract class Pessoa  {
     private String dataNascimento;
     private String email;
     private int celular;
-    private int cpf;
+    private String cpf;
     private int rg;
     private String redeSocial;
     private int idade;
@@ -21,7 +21,7 @@ public abstract class Pessoa  {
 
     }
 
-    public Pessoa(String nome, String sobreNome,String dataNascimento, String email, int celular, int cpf, int rg, String redeSocial, int idade, String nomeCompleto){
+    public Pessoa(String nome, String sobreNome,String dataNascimento, String email, int celular, String cpf, int rg, String redeSocial, int idade, String nomeCompleto){
 
           this.nome = nome;
           this.sobrenome = sobreNome;
@@ -36,6 +36,13 @@ public abstract class Pessoa  {
            
          
 
+    }
+
+    public Pessoa(String nome, String sobrenome, String cpf, int celular){
+        this.nome = nome;
+        this.sobrenome = sobrenome;
+        this.cpf = cpf;
+        this.celular = celular;
     }
 
     public void setSobrenome(String sobrenome) {
@@ -98,12 +105,12 @@ public abstract class Pessoa  {
 
     }
     
-    public void setCpf(int cpf){
+    public void setCpf(String cpf){
         this.cpf = cpf;
 
     }
 
-    public int getCpf(){
+    public String getCpf(){
         return cpf;
 
     }
