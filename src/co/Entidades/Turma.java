@@ -50,10 +50,19 @@ public class Turma {
 
     public boolean isLotada() {
         return alunos.size() >= capacidadeMaxAlunos;
-    }
+        }
 
-    @Override
-    public String toString() {
+        public void removerAluno(Aluno aluno) {
+        if (alunos.contains(aluno)) {
+            alunos.remove(aluno);
+            System.out.println("Aluno removido da turma: " + nomeTurma);
+        } else {
+            System.out.println("Aluno não encontrado na turma: " + nomeTurma);
+        }
+        }
+
+        @Override
+        public String toString() {
         if (isLotada()) {
             return nomeTurma +  " (Turma Lotada)";
         } else {

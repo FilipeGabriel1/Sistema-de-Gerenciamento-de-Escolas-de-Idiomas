@@ -1,12 +1,12 @@
 package co.Servicos;
-
-
+import co.Entidades.Aluno;
 import co.Entidades.Curso;
-
 import co.Entidades.Professor;
+import co.Entidades.Turma;
 import co.interfac.IProfessorRepositorio;
+import co.interfac.IProfessorServicos;
 
-public class ProfessorServicos extends Curso {
+public class ProfessorServicos extends Curso implements IProfessorServicos{
 
     private IProfessorRepositorio professorRepositorio;
 
@@ -68,7 +68,8 @@ public class ProfessorServicos extends Curso {
          Professor professorPesquisado = this.professorRepositorio.buscarProfessorPorNome(professor.getNome(),professor.getSobrenome());
 
             if (professorPesquisado == null) {
-                this.salvar(professor);
+                
+                
                
             }
 
@@ -128,5 +129,41 @@ public class ProfessorServicos extends Curso {
 
     private boolean isHorarioDeTrabalhoInvalido(String horarioDeTrabalho) {
         return isBlank(horarioDeTrabalho);
+    }
+
+     public void alterar(int id, int anosExperiencia, String diasDeTrabalho, String horarioDeTrabalho, String cursoLecionado, String cpf) {
+        
+        Professor professor = professorRepositorio.buscarPorCPF(cpf);
+
+        if (professor != null) {
+            
+            professor.setCpf(cpf);
+            professor.setId(id);
+            professor.setCursoLecionado(cursoLecionado);
+            professor.setAnosExperiencia(anosExperiencia);
+            professor.setDiasDeTrabalho(diasDeTrabalho);
+            professor.setHorarioDeTrabalho(horarioDeTrabalho);
+        }
+      
+
+       
+        this.professorRepositorio.alterarProfessor(professor);
+        System.out.println("Professor alterado com sucesso!");
+    }
+
+    
+    public boolean deletarProfessor(String cpf) {
+        Professor professor = buscarPorCPF(cpf);
+        if (professor != null) {
+            professorRepositorio.removerProfessor(professor);
+            System.out.println("Professor com CPF " + cpf + " removido com sucesso.");
+            return true;
+        }
+        System.out.println("Professor com CPF " + cpf + " não encontrado.");
+        return false;
+    }
+
+    public Professor buscarPorCPF(String cpf) {
+        return professorRepositorio.buscarPorCPF(cpf);
     }
 }

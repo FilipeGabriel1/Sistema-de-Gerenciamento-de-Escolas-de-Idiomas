@@ -1,6 +1,8 @@
 package co.Repositorio;
 
 import java.util.ArrayList;
+import java.util.List;
+
 import co.Entidades.Curso;
 import co.interfac.ICursoRepositorio;
 
@@ -13,16 +15,21 @@ public class CursoRepositorio implements ICursoRepositorio {
     }
    
     public void salvar(Curso curso){
-       this.cursos.add(curso);
+        if (!cursos.contains(curso)) {
+            this.cursos.add(curso);
+        } else {
+            System.out.println("Curso já existe na lista.");
+            
+        }
+      
+       
     }
 
+   
      public Curso buscarCursoPorNome(String nome) {
         for (Curso curso : cursos) {
-            if (curso.getNomeCurso().equalsIgnoreCase(nome)) {
+            if (curso.getNomeCurso().equalsIgnoreCase(nome.trim())) {
                 return curso;
-            }
-            else {
-                System.out.println("ARRAY LIST VAZIO !");
             }
         }
         return null;
@@ -34,5 +41,19 @@ public class CursoRepositorio implements ICursoRepositorio {
 
     public boolean removerCurso(Curso curso){
         return cursos.remove(curso);
+    }
+
+    public void alterarCurso(Curso c) {
+        for (Curso curso : this.cursos) {
+            if (curso.getNomeCurso().equalsIgnoreCase(c.getNomeCurso())) {
+                curso.setNomeCurso(c.getNomeCurso());
+                curso.setHorario(c.getHorario());
+                curso.setCapacidadeMaxAlunos(c.getCapacidadeMaxAlunos());
+                curso.setCapacidadeMaxAlunosPorTurma(c.getCapacidadeMaxAlunosPorTurma());
+                curso.setDiaDasAulas(c.getDiaDasAulas());
+                curso.setTurma(c.getTurma());
+                return;
+            }
+        }
     }
 }

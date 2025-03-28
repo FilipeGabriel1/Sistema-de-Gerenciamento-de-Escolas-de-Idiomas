@@ -7,8 +7,10 @@ import co.Entidades.Curso;
 import co.Entidades.Turma; 
 import co.Repositorio.CursoRepositorio;
 import co.interfac.ICursoRepositorio;
+import co.interfac.ICursoServicos;
 
-public class CursoServicos extends Aluno {
+public class CursoServicos extends Aluno implements ICursoServicos {
+
 
     private ICursoRepositorio cursoRepositorio;
 
@@ -16,6 +18,7 @@ public class CursoServicos extends Aluno {
         this.cursoRepositorio = cursoRepositorio;
    }
 
+   
     public void salvar(Curso curso){
         this.cursoRepositorio.salvar(curso);
     }
@@ -114,7 +117,14 @@ public class CursoServicos extends Aluno {
     }
 
     public void listarCursos() {
-        for (Curso curso : this.cursoRepositorio.listarTodosCursos()) {
+        List<Curso> cursos = this.cursoRepositorio.listarTodosCursos();
+      
+
+        if (cursos.isEmpty()) {
+            System.out.println("Nenhum curso cadastrado.");
+        } else {
+            System.out.println("Lista de Cursos:");
+            for (Curso curso : cursos){
             System.out.println("Nome: " + curso.getNomeCurso());
             System.out.println("Horário: " + curso.getHorario());
             System.out.println("Dias das Aulas: " + curso.getDiaDasAulas());
@@ -123,12 +133,51 @@ public class CursoServicos extends Aluno {
                 System.out.println("Turmas do Curso: " + turma.getNomeTurma());
                 System.out.println("Capacidade máxima de alunos da Turma: " + turma.getCapacidadeMaxAlunos());
                 System.out.println("Alunos matriculados na turma: "  + turma.getNomeTurma() + ": " + turma.getAlunos().size());
-                System.out.println("-----------");
-                
+                    System.out.println("-----------");
+                    
+                    }
                 }
             }
+
+            
         }
+
+        public boolean alterar(String horario, int capacidadeMaxAlunos, int capacidadeMaxAlunosPorTurma, String nomeCurso, String diasDasAulas) {
+        
+            Curso curso = this.cursoRepositorio.buscarCursoPorNome(nomeCurso);
+            if (curso != null) {
+                curso.setDiaDasAulas(diasDasAulas);
+                curso.setHorario(horario);  
+                curso.setCapacidadeMaxAlunos(capacidadeMaxAlunos);
+                curso.setCapacidadeMaxAlunosPorTurma(capacidadeMaxAlunosPorTurma);
+                curso.setNomeCurso(nomeCurso);
+                salvar(curso);
+                this.cursoRepositorio.alterarCurso(curso);
+                System.out.println("Curso alterado com sucesso!");
+                return true;
+            } else {
+                System.out.println("Curso não encontrado!");
+                return false;
+            }
+        
+        }
+
+        public Curso buscarCursoPorNome(String nomeCurso) {
+            return cursoRepositorio.buscarCursoPorNome(nomeCurso);
+        }
+
+        public boolean deletarCurso(String nomeCurso) {
+            Curso curso = cursoRepositorio.buscarCursoPorNome(nomeCurso);
+            if (curso != null) {
+                cursoRepositorio.removerCurso(curso);
+                System.out.println("Curso removido: " + nomeCurso);
+                return true;
+            } else {
+                System.out.println("Curso não encontrado: " + nomeCurso);
+                return false;
+            }
     }
+}
     
        
        

@@ -16,6 +16,13 @@ public class Aluno extends Pessoa{
     public Aluno (){
      this.responsaveis = new ArrayList<>();
     }
+
+    public Aluno (String nome, String sobrenome, int idade, String cpf, int matricula, double mensalidade){
+      super(nome, sobrenome, idade, cpf);
+      this.matricula = matricula;
+      this.mensalidade = mensalidade;
+      
+    }
     
     public void adicionarResponsavel(String nome, String sobrenome, String cpf, int celular ){
       this.responsaveis.add(new Responsavel(nome, sobrenome, cpf, celular));

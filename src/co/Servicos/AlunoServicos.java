@@ -7,18 +7,36 @@ import co.Entidades.Curso;
 import co.Entidades.Turma;
 import co.Repositorio.AlunoRepositorio;
 import co.interfac.IAlunoRepositorio;
+import co.interfac.IAlunoServicos;
 
-public class AlunoServicos extends Curso{
+public class AlunoServicos extends Curso implements IAlunoServicos {
+  
+
+    public void alterar(Aluno aluno, int matricula, String nome, String sobrenome, int idade, int mensalidade, Curso nomeCurso, Turma turma, String cpf) {
+        aluno.setMatricula(matricula);
+        aluno.setNome(nome);
+        aluno.setSobrenome(sobrenome);
+        aluno.setIdade(idade);
+        aluno.setMensalidade(mensalidade);
+        aluno.setCursos(nomeCurso);
+        aluno.setTurmas(turma);
+        aluno.setCpf(cpf);
+        this.alunoRepositorio.alterarAluno(aluno);
+        System.out.println("Aluno alterado com sucesso!");
+    }
 
     private IAlunoRepositorio alunoRepositorio;
 
     public AlunoServicos(AlunoRepositorio alunoRepositorio) {
         this.alunoRepositorio = alunoRepositorio;
-    }
+        }
+    
     
     public void salvar(Aluno aluno){
         this.alunoRepositorio.salvar(aluno);
     }
+
+   
 
     public void matricular(Aluno aluno, int matricula, String nome, String sobrenome, int idade, int mensalidade, Curso nomeCurso, Turma turma, String cpf) {
           
@@ -32,6 +50,7 @@ public class AlunoServicos extends Curso{
             aluno.setCursos(nomeCurso);
             aluno.setTurmas(turma);
             
+            alunoRepositorio.salvar(aluno);
             if (aluno.getIdade() < 14) {
                 System.out.println("Aluno menor de 14 anos, nao pode ser matriculado");
                 return;
@@ -105,17 +124,15 @@ public class AlunoServicos extends Curso{
                 }
             }
 
-            public boolean deletarAluno(Aluno aluno){
-              Aluno alunoPesquisado = this.alunoRepositorio.buscarAlunoPorNome(aluno.getNome(), aluno.getSobrenome());
-
-              if (alunoPesquisado != null) {
-                System.out.println("Aluno deletado com Sucesso! ");
-                return this.alunoRepositorio.removerAluno(aluno);
-              }
-              else {
-                System.out.println("Aluno Inexistente! ");
+            public boolean deletarAluno(String cpf) {
+                Aluno aluno = buscarPorCPF(cpf);
+                if (aluno != null) {
+                    alunoRepositorio.removerAluno(aluno);
+                    System.out.println("Aluno com CPF " + cpf + " removido com sucesso.");
+                    return true;
+                }
+                System.out.println("Aluno com CPF " + cpf + " não encontrado.");
                 return false;
-              }
             }
 
             public void inativarAluno(Aluno aluno){
@@ -142,7 +159,7 @@ public class AlunoServicos extends Curso{
             public void listarAlunos(){
                 for (Aluno aluno : this.alunoRepositorio.listarTodosAlunos()){
                     if (aluno.isAtivo()) {
-                        System.out.println("Nome: " + aluno.getNome() + " " + " Sobrenome: " + aluno.getSobrenome());            
+                        System.out.println("Nome: " + aluno.getNome() + " " + " Sobrenome: " + aluno.getSobrenome() + " " + " Matricula: " + aluno.getMatricula() + " " + " CPF: " + aluno.getCpf() + " " + " Idade: " + aluno.getIdade() + " " + " Mensalidade: " + aluno.getMensalidade() + " " + " Curso: " + aluno.getCursos().getNomeCurso() + " " + " Turma: " + aluno.getTurmas().getNomeTurma());             
                     }      
                 }
             }
@@ -204,12 +221,59 @@ public class AlunoServicos extends Curso{
             throw new Exception("É necessário adicionar pelo menos um responsável para alunos menores de 18 anos.");
         }
     }
-  
 
+    public void alterar(Aluno aluno, int matricula, int idade, int mensalidade, Curso nomeCurso, Turma turma) {
+        aluno.setMatricula(matricula);
+        aluno.setIdade(idade);
+        aluno.setMensalidade(mensalidade);
+
+        if (aluno.getCursos() != null) {
+            aluno.getCursos().removerAluno(aluno);
+            
         }
-    
-   
+        aluno.setCursos(nomeCurso);
 
+        if (aluno.getTurmas() != null) {
+            aluno.getTurmas().removerAluno(aluno);
+            
+        }
+        aluno.setTurmas(turma);
+
+        nomeCurso.adicionarAluno(aluno);
+        turma.adicionarAluno(aluno);
+        
+    
+       
+        this.alunoRepositorio.alterarAluno(aluno);
+        System.out.println("Aluno alterado com sucesso!");
+    }
+
+    public void alterarCursoETurma(Aluno aluno, Curso novoCurso, Turma novaTurma) {
+        // Remove o aluno da turma e curso atuais
+        aluno.getTurmas().removerAluno(aluno);
+        aluno.getCursos().removerAluno(aluno);
+    
+        // Atualiza as referências do curso e turma no objeto Aluno
+        aluno.setCursos(novoCurso);
+        aluno.setTurmas(novaTurma);
+    
+        // Adiciona o aluno à nova turma e curso
+        novaTurma.adicionarAluno(aluno);
+        novoCurso.adicionarAluno(aluno);
+    
+        // Atualiza o aluno no repositório
+        this.alunoRepositorio.alterarAluno(aluno);
+        System.out.println("Aluno alterado de curso e turma com sucesso!");
+    }
+
+    public Aluno buscarAlunoPorNome(String nome, String sobrenome) {
+        return alunoRepositorio.buscarAlunoPorNome(nome, sobrenome);
+    }
+    
+    public Aluno buscarPorCPF(String cpf) {
+        return alunoRepositorio.buscarPorCPF(cpf);
+    }
+}
 
 
     

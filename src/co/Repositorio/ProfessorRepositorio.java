@@ -1,5 +1,6 @@
 package co.Repositorio;
 
+import co.Entidades.Aluno;
 import co.Entidades.Professor;
 import co.interfac.IProfessorRepositorio;
 
@@ -37,4 +38,31 @@ public class ProfessorRepositorio implements IProfessorRepositorio {
     public boolean removerProfessor(Professor professor){
     return professores.remove(professor);
 }
+
+
+
+    public void alterarProfessor(Professor p) {
+        for (Professor professor : this.professores) {
+            if (professor.getNome().equalsIgnoreCase(p.getNome()) && professor.getSobrenome().equalsIgnoreCase(p.getSobrenome())) {
+                professor.setNome(p.getNome());
+                professor.setSobrenome(p.getSobrenome());
+                professor.setAnosExperiencia(p.getAnosExperiencia());
+                professor.setDiasDeTrabalho(p.getDiasDeTrabalho());
+                professor.setHorarioDeTrabalho(p.getHorarioDeTrabalho());
+                professor.setCursoLecionado(p.getCursoLecionado());
+                professor.setCpf(p.getCpf());
+                professor.setId(p.getId());
+
+                return;
+            }
+        }
+    }
+     public Professor buscarPorCPF(String cpf) {
+            for (Professor professor : professores) {
+                if (professor.getCpf().equals(cpf)) {
+                    return professor;
+                }
+            }
+            return null;
+        }
 }

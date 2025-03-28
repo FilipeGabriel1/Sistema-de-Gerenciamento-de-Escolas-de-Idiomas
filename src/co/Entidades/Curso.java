@@ -3,7 +3,7 @@ package co.Entidades;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Curso{
+public class Curso extends Pessoa{
     
     private String horario;
     private int capacidadeMaxAlunos;
@@ -16,6 +16,10 @@ public class Curso{
     public Curso() {
         this.turma = new ArrayList<>();
         this.alunos = new ArrayList<>();
+    }
+
+    public Curso(String nomeCurso){
+        this.nomeCurso = nomeCurso;
     }
     
     public Curso(String nomeCurso, int cargaHoraria, int capacidadeMaxAlunos, String horario, int capacidadeMaxAlunosPorTurma, String diaDasAulas) {
@@ -101,6 +105,15 @@ public class Curso{
 
     public void setAlunos(List<Aluno> alunos) {
         this.alunos = alunos;
+    }
+
+    public void removerAluno(Aluno aluno) {
+        if (alunos.contains(aluno)) {
+            alunos.remove(aluno);
+            System.out.println("Aluno removido: " + aluno);
+        } else {
+            System.out.println("Aluno não encontrado no curso: " + nomeCurso);
+        }
     }
 
 @Override

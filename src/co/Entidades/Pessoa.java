@@ -21,6 +21,15 @@ public abstract class Pessoa  {
 
     }
 
+   
+        public Pessoa(String nome, String sobrenome, int idade, String cpf) {
+            this.nome = nome;
+            this.sobrenome = sobrenome;
+            this.idade = idade;
+            this.cpf = cpf;
+        }
+    
+
     public Pessoa(String nome, String sobreNome,String dataNascimento, String email, int celular, String cpf, int rg, String redeSocial, int idade, String nomeCompleto){
 
           this.nome = nome;

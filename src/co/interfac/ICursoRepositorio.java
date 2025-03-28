@@ -1,6 +1,8 @@
 package co.interfac;
 
 import java.util.ArrayList;
+import java.util.List;
+
 import co.Entidades.Curso;
 
 public interface ICursoRepositorio {
@@ -9,4 +11,6 @@ public interface ICursoRepositorio {
     Curso buscarCursoPorNome(String nome);
     public boolean removerCurso(Curso curso);
     public ArrayList<Curso> listarTodosCursos();
+    void alterarCurso(Curso curso);
+     
 }

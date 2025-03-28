@@ -13,7 +13,10 @@ public class Professor extends Pessoa {
 
   }
 
-  public Professor(String cargoAtual,int anosExperiencia,  String diasDeTrabalho, String horarioDeTrabalho, int id, String disciplinaLecionada, String cursoLecionado ){
+  public Professor(String nome, String sobrenome, int idade, String cpf, String cargoAtual,int anosExperiencia,  String diasDeTrabalho, String horarioDeTrabalho, int id, String disciplinaLecionada, String cursoLecionado )
+  {
+    super(nome, sobrenome, idade, cpf);
+    
     this.cargoAtual = cargoAtual;
     this.anosExperiencia = anosExperiencia;
     this.diasDeTrabalho = diasDeTrabalho;
