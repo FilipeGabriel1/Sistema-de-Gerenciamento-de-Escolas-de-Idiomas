@@ -15,7 +15,28 @@ public class TurmaServicos implements ITurmaServicos {
     }
 
     public void salvar(Turma turma) {
+        if (turma == null) {
+            System.out.println("Turma inválida. Não pode ser salva.");
+            return;
+        }
+    
+        if (turma.getCapacidadeMaxAlunos() <= 0) {
+            System.out.println("Capacidade máxima de alunos inválida. Turma não pode ser salva.");
+            return;
+        }
+    
+        if (turma.getNomeTurma() == null || turma.getNomeTurma().trim().isEmpty()) {
+            System.out.println("Nome da turma inválido. Turma não pode ser salva.");
+            return;
+        }
+    
+        if (turma.isLotada()) {
+            System.out.println("A turma já está lotada. Não pode ser salva.");
+            return;
+        }
+    
         turmaRepositorio.salvar(turma);
+        System.out.println("Turma " + turma.getNomeTurma() + " salva com sucesso!");
     }
 
     public void atualizar(Turma turma) {
@@ -63,16 +84,27 @@ public class TurmaServicos implements ITurmaServicos {
        
     }
 
-    public boolean alterarTurma(String nomeTurma, int novaCapacidadeMaxAlunos){
+    public boolean alterarTurma(String nomeTurma, int novaCapacidadeMaxAlunos) {
         Turma turma = turmaRepositorio.buscarPorNome(nomeTurma);
-        if (turma != null) {
-            turma.setCapacidadeMaxAlunos(novaCapacidadeMaxAlunos);
-            turmaRepositorio.atualizar(turma);
-            System.out.println("Turma: " + nomeTurma +  " alterada com sucesso!");
-            return true;
-        } else {
-            System.out.println("Turma não encontrada!");
+    
+        if (turma == null) {
+            System.out.println("Turma não encontrada: " + nomeTurma);
             return false;
         }
+    
+        if (novaCapacidadeMaxAlunos <= 0) {
+            System.out.println("Capacidade máxima de alunos inválida. Alteração não pode ser realizada.");
+            return false;
+        }
+    
+        if (turma.getAlunos().size() > novaCapacidadeMaxAlunos) {
+            System.out.println("A nova capacidade máxima é menor que o número atual de alunos. Alteração não pode ser realizada.");
+            return false;
+        }
+    
+        turma.setCapacidadeMaxAlunos(novaCapacidadeMaxAlunos);
+        turmaRepositorio.atualizar(turma);
+        System.out.println("Turma " + nomeTurma + " alterada com sucesso!");
+        return true;
     }
 }

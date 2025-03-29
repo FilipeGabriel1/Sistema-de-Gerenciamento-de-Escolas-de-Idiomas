@@ -6,7 +6,9 @@ import co.Entidades.Turma;
 import co.interfac.IProfessorRepositorio;
 import co.interfac.IProfessorServicos;
 
-public class ProfessorServicos extends Curso implements IProfessorServicos{
+public class ProfessorServicos extends Curso implements IProfessorServicos {
+
+   
 
     private IProfessorRepositorio professorRepositorio;
 
@@ -15,7 +17,38 @@ public class ProfessorServicos extends Curso implements IProfessorServicos{
     }
 
     public void salvar(Professor professor) {
-        this.professorRepositorio.salvar(professor);
+        if (invalidarCpf(professor.getCpf())) {
+            System.out.println("CPF inválido. Professor não pode ser cadastrado.");
+            return;
+        }
+    
+        if (invalidarID(professor.getId())) {
+            System.out.println("ID inválido. Professor não pode ser cadastrado.");
+            return;
+        }
+    
+        if (isBlank(professor.getNome()) || isBlank(professor.getSobrenome())) {
+            System.out.println("Nome ou Sobrenome inválido. Professor não pode ser cadastrado.");
+            return;
+        }
+    
+        if (isAnosExperienciaInvalido(professor.getAnosExperiencia())) {
+            System.out.println("Anos de Experiência inválido. Professor não pode ser cadastrado.");
+            return;
+        }
+    
+        if (isDiasDeTrabalhoInvalido(professor.getDiasDeTrabalho())) {
+            System.out.println("Dias de Trabalho inválido. Professor não pode ser cadastrado.");
+            return;
+        }
+    
+        if (isHorarioDeTrabalhoInvalido(professor.getHorarioDeTrabalho())) {
+            System.out.println("Horário de Trabalho inválido. Professor não pode ser cadastrado.");
+            return;
+        }
+    
+        professorRepositorio.salvar(professor);
+        System.out.println("Professor cadastrado com sucesso!");
     }
 
     public void cadastrar(Professor professor, int id, String nome, String sobrenome,  int anosExperiencia, String diasDeTrabalho, String horarioDeTrabalho, String cursoLecionado, String cpf) {
@@ -131,26 +164,38 @@ public class ProfessorServicos extends Curso implements IProfessorServicos{
         return isBlank(horarioDeTrabalho);
     }
 
-     public void alterar(int id, int anosExperiencia, String diasDeTrabalho, String horarioDeTrabalho, String cursoLecionado, String cpf) {
-        
+    public void alterarProfessor(String cpf, int novaIdade, int novosAnosExperiencia, String novosDiasDeTrabalho, String novoHorarioDeTrabalho, String novoCursoLecionado, int novoId) {
         Professor professor = professorRepositorio.buscarPorCPF(cpf);
-
+    
         if (professor != null) {
-            
-            professor.setCpf(cpf);
-            professor.setId(id);
-            professor.setCursoLecionado(cursoLecionado);
-            professor.setAnosExperiencia(anosExperiencia);
-            professor.setDiasDeTrabalho(diasDeTrabalho);
-            professor.setHorarioDeTrabalho(horarioDeTrabalho);
+           
+            if (novaIdade > 0) {
+                professor.setIdade(novaIdade);
+            }
+            if (!isBlank(novosDiasDeTrabalho)) {
+                professor.setDiasDeTrabalho(novosDiasDeTrabalho);
+            }
+            if (!isBlank(novoHorarioDeTrabalho)) {
+                professor.setHorarioDeTrabalho(novoHorarioDeTrabalho);
+            }
+            if (!isBlank(novoCursoLecionado)) {
+                professor.setCursoLecionado(novoCursoLecionado);
+            }
+            if (novosAnosExperiencia >= 0) {
+                professor.setAnosExperiencia(novosAnosExperiencia);
+            }
+            if (novoId > 0) {
+                professor.setId(novoId);
+                
+            }
+    
+            professorRepositorio.alterarProfessor(professor);
+            System.out.println("Professor com CPF " + cpf + " alterado com sucesso!");
+        } else {
+            System.out.println("Professor com CPF " + cpf + " não encontrado.");
         }
-      
-
-       
-        this.professorRepositorio.alterarProfessor(professor);
-        System.out.println("Professor alterado com sucesso!");
     }
-
+      
     
     public boolean deletarProfessor(String cpf) {
         Professor professor = buscarPorCPF(cpf);

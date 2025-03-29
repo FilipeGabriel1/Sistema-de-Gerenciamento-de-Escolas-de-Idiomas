@@ -18,10 +18,54 @@ public class CursoServicos extends Aluno implements ICursoServicos {
         this.cursoRepositorio = cursoRepositorio;
    }
 
-   
-    public void salvar(Curso curso){
-        this.cursoRepositorio.salvar(curso);
+   public void salvar(Curso curso) {
+    if (isBlank(curso.getNomeCurso())) {
+        System.out.println("Nome do curso inválido. Curso não pode ser cadastrado.");
+        return;
     }
+
+    if (isBlank(curso.getHorario())) {
+        System.out.println("Horário do curso inválido. Curso não pode ser cadastrado.");
+        return;
+    }
+
+    if (isBlank(curso.getDiaDasAulas())) {
+        System.out.println("Dias das aulas inválidos. Curso não pode ser cadastrado.");
+        return;
+    }
+
+    if (curso.getCapacidadeMaxAlunos() <= 0) {
+        System.out.println("Capacidade máxima de alunos inválida. Curso não pode ser cadastrado.");
+        return;
+    }
+
+    if (curso.getCapacidadeMaxAlunosPorTurma() <= 0) {
+        System.out.println("Capacidade máxima de alunos por turma inválida. Curso não pode ser cadastrado.");
+        return;
+    }
+
+    if (curso.getTurma() == null || curso.getTurma().isEmpty()) {
+        System.out.println("Nenhuma turma associada ao curso. Curso não pode ser cadastrado.");
+        return;
+    }
+
+    int totalAlunos = 0;
+    for (Turma turma : curso.getTurma()) {
+        totalAlunos += turma.getAlunos().size();
+        if (turma.getAlunos().size() > curso.getCapacidadeMaxAlunosPorTurma()) {
+            System.out.println("Capacidade máxima de alunos por turma ultrapassada. Curso não pode ser cadastrado.");
+            return;
+        }
+    }
+
+    if (totalAlunos > curso.getCapacidadeMaxAlunos()) {
+        System.out.println("Capacidade máxima de alunos do curso ultrapassada. Curso não pode ser cadastrado.");
+        return;
+    }
+
+    cursoRepositorio.salvar(curso);
+    System.out.println("Curso cadastrado com sucesso!");
+}
 
     
     public void adicionarCurso(Curso curso, String horario, int capacidadeMaxAlunos, int capacidadeMaxAlunosPorTurma, String nomeCurso, List<Turma> turmas, String diasDasAulas) {
@@ -143,23 +187,42 @@ public class CursoServicos extends Aluno implements ICursoServicos {
         }
 
         public boolean alterar(String horario, int capacidadeMaxAlunos, int capacidadeMaxAlunosPorTurma, String nomeCurso, String diasDasAulas) {
-        
             Curso curso = this.cursoRepositorio.buscarCursoPorNome(nomeCurso);
+        
             if (curso != null) {
+                if (isBlank(horario)) {
+                    System.out.println("Horário inválido. Alteração não pode ser realizada.");
+                    return false;
+                }
+        
+                if (isBlank(diasDasAulas)) {
+                    System.out.println("Dias das aulas inválidos. Alteração não pode ser realizada.");
+                    return false;
+                }
+        
+                if (capacidadeMaxAlunos <= 0) {
+                    System.out.println("Capacidade máxima de alunos inválida. Alteração não pode ser realizada.");
+                    return false;
+                }
+        
+                if (capacidadeMaxAlunosPorTurma <= 0) {
+                    System.out.println("Capacidade máxima de alunos por turma inválida. Alteração não pode ser realizada.");
+                    return false;
+                }
+        
                 curso.setDiaDasAulas(diasDasAulas);
-                curso.setHorario(horario);  
+                curso.setHorario(horario);
                 curso.setCapacidadeMaxAlunos(capacidadeMaxAlunos);
                 curso.setCapacidadeMaxAlunosPorTurma(capacidadeMaxAlunosPorTurma);
                 curso.setNomeCurso(nomeCurso);
-                salvar(curso);
-                this.cursoRepositorio.alterarCurso(curso);
+        
+                cursoRepositorio.alterarCurso(curso);
                 System.out.println("Curso alterado com sucesso!");
                 return true;
             } else {
                 System.out.println("Curso não encontrado!");
                 return false;
             }
-        
         }
 
         public Curso buscarCursoPorNome(String nomeCurso) {

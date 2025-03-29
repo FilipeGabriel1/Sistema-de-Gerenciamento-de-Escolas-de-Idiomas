@@ -425,9 +425,11 @@ public class App {
                 System.out.println("Digite o CPF do professor:");
                 String cpfProfessor = scanner.nextLine();
 
-             Professor professor = new Professor(nomeProfessor, sobrenomeProfessor, idadeProfessor, cpfProfessor, cargoAtual, anosExperiencia, diasDeTrabalho, horarioDeTrabalho, idProfessor, disciplinaLecionada, cursoLecionado);
+             Professor professor = new Professor(nomeProfessor, sobrenomeProfessor, idadeProfessor, cpfProfessor, cargoAtual, anosExperiencia, diasDeTrabalho, horarioDeTrabalho, idProfessor,  cursoLecionado);
 
              professorServicos.cadastrar(professor, idProfessor, nomeProfessor, sobrenomeProfessor, anosExperiencia, diasDeTrabalho, horarioDeTrabalho, cursoLecionado, cpfProfessor);
+
+             professorServicos.salvar(professor);
                     
              System.out.println("Professor " + nomeProfessor + " cadastrado com sucesso.");
                     break;
@@ -458,13 +460,11 @@ public class App {
                         String novoHorarioDeTrabalho = scanner.nextLine();
                         System.out.println("Digite o novo curso lecionado pelo professor (ou pressione Enter para manter o atual):");
                         String novoCursoLecionado = scanner.nextLine();
-                        System.out.println("Digite a nova disciplina lecionada pelo professor (ou pressione Enter para manter a atual):");
-                        String novaDisciplinaLecionada = scanner.nextLine();
                         System.out.println("Digite o novo ID do professor (ou pressione Enter para manter o atual):");
                         String novoIdStr = scanner.nextLine();
                         int novoId = novoIdStr.isEmpty() ? professor2.getId() : Integer.parseInt(novoIdStr);
                 
-                        professorServicos.alterar(novoId, novosAnosExperiencia, novosDiasDeTrabalho, novoHorarioDeTrabalho, novoCursoLecionado, cpfProfessorAlterar);
+                        professorServicos.alterarProfessor(cpfProfessorAlterar, novaIdade, novosAnosExperiencia, novosDiasDeTrabalho, novoHorarioDeTrabalho, novoCursoLecionado, novoId);
                     }
 
                     break;

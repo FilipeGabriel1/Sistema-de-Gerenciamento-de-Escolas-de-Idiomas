@@ -12,18 +12,6 @@ import co.interfac.IAlunoServicos;
 public class AlunoServicos extends Curso implements IAlunoServicos {
   
 
-    public void alterar(Aluno aluno, int matricula, String nome, String sobrenome, int idade, int mensalidade, Curso nomeCurso, Turma turma, String cpf) {
-        aluno.setMatricula(matricula);
-        aluno.setNome(nome);
-        aluno.setSobrenome(sobrenome);
-        aluno.setIdade(idade);
-        aluno.setMensalidade(mensalidade);
-        aluno.setCursos(nomeCurso);
-        aluno.setTurmas(turma);
-        aluno.setCpf(cpf);
-        this.alunoRepositorio.alterarAluno(aluno);
-        System.out.println("Aluno alterado com sucesso!");
-    }
 
     private IAlunoRepositorio alunoRepositorio;
 
@@ -32,10 +20,49 @@ public class AlunoServicos extends Curso implements IAlunoServicos {
         }
     
     
-    public void salvar(Aluno aluno){
-        this.alunoRepositorio.salvar(aluno);
-    }
-
+        public void salvar(Aluno aluno) {
+            if (!invalidarcpfAluno(aluno.getCpf())) {
+                System.out.println("CPF inválido. Aluno não pode ser cadastrado.");
+                return;
+            }
+        
+            if (!isValidMatricula(aluno.getMatricula())) {
+                System.out.println("Matrícula inválida. Aluno não pode ser cadastrado.");
+                return;
+            }
+        
+            if (isBlank(aluno.getNome()) || isBlank(aluno.getSobrenome())) {
+                System.out.println("Nome ou Sobrenome inválido. Aluno não pode ser cadastrado.");
+                return;
+            }
+        
+            if (invalidarMensalidade((int) aluno.getMensalidade())) {
+                System.out.println("Mensalidade inválida. Aluno não pode ser cadastrado.");
+                return;
+            }
+        
+            if (aluno.getTurmas().getCapacidadeMaxAlunos() > 30) {
+                System.out.println("Turma lotada. Aluno não pode ser cadastrado.");
+                return;
+            }
+        
+            if (aluno.getIdade() < 14) {
+                System.out.println("Aluno menor de 14 anos. Não pode ser matriculado.");
+                return;
+            }
+        
+            if (aluno.getIdade() < 18) {
+                try {
+                    adicionarResponsavel(aluno);
+                } catch (Exception e) {
+                    System.out.println("Erro ao adicionar responsáveis: " + e.getMessage());
+                    return;
+                }
+            }
+        
+            alunoRepositorio.salvar(aluno);
+            System.out.println("Aluno cadastrado com sucesso!");
+        }
    
 
     public void matricular(Aluno aluno, int matricula, String nome, String sobrenome, int idade, int mensalidade, Curso nomeCurso, Turma turma, String cpf) {
@@ -223,47 +250,45 @@ public class AlunoServicos extends Curso implements IAlunoServicos {
     }
 
     public void alterar(Aluno aluno, int matricula, int idade, int mensalidade, Curso nomeCurso, Turma turma) {
+        if (!isValidMatricula(matricula)) {
+            System.out.println("Matrícula inválida. Alteração não pode ser realizada.");
+            return;
+        }
+    
+        if (idade <= 0) {
+            System.out.println("Idade inválida. Alteração não pode ser realizada.");
+            return;
+        }
+    
+        if (invalidarMensalidade(mensalidade)) {
+            System.out.println("Mensalidade inválida. Alteração não pode ser realizada.");
+            return;
+        }
+    
+        if (turma.getCapacidadeMaxAlunos() > 30 || turma.isLotada()) {
+            System.out.println("Turma lotada. Alteração não pode ser realizada.");
+            return;
+        }
+    
         aluno.setMatricula(matricula);
         aluno.setIdade(idade);
         aluno.setMensalidade(mensalidade);
-
+    
         if (aluno.getCursos() != null) {
             aluno.getCursos().removerAluno(aluno);
-            
         }
         aluno.setCursos(nomeCurso);
-
+    
         if (aluno.getTurmas() != null) {
             aluno.getTurmas().removerAluno(aluno);
-            
         }
         aluno.setTurmas(turma);
-
+    
         nomeCurso.adicionarAluno(aluno);
         turma.adicionarAluno(aluno);
-        
     
-       
-        this.alunoRepositorio.alterarAluno(aluno);
+        alunoRepositorio.alterarAluno(aluno);
         System.out.println("Aluno alterado com sucesso!");
-    }
-
-    public void alterarCursoETurma(Aluno aluno, Curso novoCurso, Turma novaTurma) {
-        // Remove o aluno da turma e curso atuais
-        aluno.getTurmas().removerAluno(aluno);
-        aluno.getCursos().removerAluno(aluno);
-    
-        // Atualiza as referências do curso e turma no objeto Aluno
-        aluno.setCursos(novoCurso);
-        aluno.setTurmas(novaTurma);
-    
-        // Adiciona o aluno à nova turma e curso
-        novaTurma.adicionarAluno(aluno);
-        novoCurso.adicionarAluno(aluno);
-    
-        // Atualiza o aluno no repositório
-        this.alunoRepositorio.alterarAluno(aluno);
-        System.out.println("Aluno alterado de curso e turma com sucesso!");
     }
 
     public Aluno buscarAlunoPorNome(String nome, String sobrenome) {

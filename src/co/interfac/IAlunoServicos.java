@@ -14,7 +14,6 @@ public interface IAlunoServicos {
     void inativarAluno(Aluno aluno);
     void listarAlunosDesativados();
     void listarAlunos();
-    void alterar(Aluno aluno, int matricula, String nome, String sobrenome, int idade, int mensalidade, Curso nomeCurso, Turma turma, String cpf);
-    void alterarCursoETurma(Aluno aluno, Curso novoCurso, Turma novaTurma);
+    void alterar(Aluno aluno, int matricula, int idade, int mensalidade, Curso nomeCurso, Turma turma);
     
 }

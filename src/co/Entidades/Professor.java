@@ -13,7 +13,7 @@ public class Professor extends Pessoa {
 
   }
 
-  public Professor(String nome, String sobrenome, int idade, String cpf, String cargoAtual,int anosExperiencia,  String diasDeTrabalho, String horarioDeTrabalho, int id, String disciplinaLecionada, String cursoLecionado )
+  public Professor(String nome, String sobrenome, int idade, String cpf, String cargoAtual,int anosExperiencia,  String diasDeTrabalho, String horarioDeTrabalho, int id, String cursoLecionado)
   {
     super(nome, sobrenome, idade, cpf);
     
@@ -22,7 +22,8 @@ public class Professor extends Pessoa {
     this.diasDeTrabalho = diasDeTrabalho;
     this.horarioDeTrabalho = horarioDeTrabalho;
     this.id = id;
-    this.cursoLecionado = cursoLecionado;  
+    this.cursoLecionado = cursoLecionado;
+    
   }
 
   public String getDiasDeTrabalho() {

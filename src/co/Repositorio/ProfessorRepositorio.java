@@ -49,7 +49,6 @@ public class ProfessorRepositorio implements IProfessorRepositorio {
                 professor.setAnosExperiencia(p.getAnosExperiencia());
                 professor.setDiasDeTrabalho(p.getDiasDeTrabalho());
                 professor.setHorarioDeTrabalho(p.getHorarioDeTrabalho());
-                professor.setCursoLecionado(p.getCursoLecionado());
                 professor.setCpf(p.getCpf());
                 professor.setId(p.getId());
 
